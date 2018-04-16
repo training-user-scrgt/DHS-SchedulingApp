@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -43,12 +44,15 @@ public class ReservationController {
     }
 
 
-//    @GetMapping
-//    @ResponseBody
-//    public ResponseEntity<List<Reservation>> getReservationsByDate() {
-//
-//        return new ResponseEntity<List<Reservation>>(
-//                reservationService.getReservationsByDate(LocalDate.of(2018, 4, 20)), HttpStatus.OK);
-//    }
+    @GetMapping
+    @ResponseBody
+    @RequestMapping(value = "/{dateString}")
+    public ResponseEntity<List<Reservation>> getReservationsByDate(@PathVariable String dateString) {
+
+        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
+
+        return new ResponseEntity<List<Reservation>>(
+                reservationService.getReservationsByDate(date), HttpStatus.OK);
+    }
 
 }

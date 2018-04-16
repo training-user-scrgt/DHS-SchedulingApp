@@ -12,8 +12,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -59,7 +65,7 @@ public class ReservationControllerTest {
 
     }
 
-        @Test
+    @Test
     public void shouldFailCreateReservation() throws Exception {
 
         Reservation reservation = new Reservation();
@@ -71,6 +77,24 @@ public class ReservationControllerTest {
                 .content(BAD_RESERVATION_BODY)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError());
+
+    }
+
+    @Test
+    public void shouldGetReservationsByDate() throws Exception {
+
+        Reservation reservation = new Reservation();
+        reservation.setId(1);
+        reservation.setReservationDate(LocalDate.of(2018, 4, 20));
+
+        List<Reservation> reservationList = new ArrayList<Reservation>(1);
+        reservationList.add(reservation);
+
+        when(reservationService.getReservationsByDate(any(LocalDate.class))).thenReturn(reservationList);
+
+        mvc.perform(get("/reservation/2018-04-20")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
     }
 
