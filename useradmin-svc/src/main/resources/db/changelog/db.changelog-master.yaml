@@ -74,6 +74,36 @@ databaseChangeLog:
                   type: varchar(200)
                   constraints:
                     nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: created_by
+            baseTableName: users
+            constraintName: fk_created_by_users_id
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: users
+        - addForeignKeyConstraint:
+            baseColumnNames: updated_by
+            baseTableName: users
+            constraintName: fk_updated_by_users_id
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: users
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: users
+            constraintName: fk_users_role_id
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: roles
   - changeSet:
       id: 2
       author: karthik.krishnan
