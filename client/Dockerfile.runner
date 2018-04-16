@@ -1,0 +1,10 @@
+FROM node:6.9
+
+RUN mkdir /opt/app
+
+ENV HOME=/opt/app
+WORKDIR $HOME
+
+RUN npm install -g @angular/cli && npm cache clean
+
+EXPOSE 4200
