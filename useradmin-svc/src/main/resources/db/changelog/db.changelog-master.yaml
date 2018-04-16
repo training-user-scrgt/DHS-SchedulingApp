@@ -1,0 +1,117 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: karthik.krishnan
+      comment: "Initial table creation"
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: login_token
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_by
+                  type: int
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: karthik.krishnan
+      comment: "Initial table population for Roles"
+      changes:
+        - insert:
+          tableName: roles
+          columns:
+          - column:
+            name: id
+            value: "0"
+          - column:
+            name: role
+            value: "User"
+        - insert:
+          tableName: roles
+          columns:
+          - column:
+            name: id
+            value: "1"
+          - column:
+            name: role
+            value: "Administrator"
+        - insert:
+          tableName: roles
+          columns:
+          - column:
+            name: id
+            value: "2"
+          - column:
+            name: role
+            value: "Report Manager"
+        - insert:
+          tableName: roles
+          columns:
+          - column:
+            name: id
+            value: "3"
+          - column:
+            name: role
+            value: "Panel"
