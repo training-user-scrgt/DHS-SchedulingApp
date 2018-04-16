@@ -4,6 +4,7 @@ package gov.dhs.uscis.odos2.reservation.service;
 import gov.dhs.uscis.odos2.reservation.exception.InvalidReservationException;
 import gov.dhs.uscis.odos2.reservation.model.Reservation;
 import gov.dhs.uscis.odos2.reservation.repository.ReservationRepository;
+import gov.dhs.uscis.odos2.reservation.util.ReservationConflictHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ import java.time.LocalTime;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -30,6 +32,9 @@ public class ReservationCreationTest {
     @MockBean
     private ReservationRepository reservationRepository;
 
+    @MockBean
+    private ReservationConflictHelper reservationConflictHelper;
+
     Reservation reservation;
 
     @TestConfiguration
@@ -38,6 +43,11 @@ public class ReservationCreationTest {
         @Bean
         public ReservationService reservationService() {
             return new ReservationServiceImpl();
+        }
+
+        @Bean
+        public ReservationConflictHelper reservationConflictHelper() {
+            return new ReservationConflictHelper();
         }
     }
 
@@ -61,6 +71,15 @@ public class ReservationCreationTest {
     public void shouldThrowExceptionDueToMaxTimeConstraint() throws InvalidReservationException {
 
         this.reservation.setEndTime(LocalTime.of(17, 20));
+        reservationService.createNewReservation(this.reservation);
+
+    }
+
+    @Test(expected = InvalidReservationException.class)
+    public void shouldThrowExceptionDueToConflict() throws InvalidReservationException {
+
+        when(reservationConflictHelper
+                .isThereConflict(anyList(), any(Reservation.class))).thenReturn(true);
         reservationService.createNewReservation(this.reservation);
 
     }

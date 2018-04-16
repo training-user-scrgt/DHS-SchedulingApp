@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends CrudRepository<Reservation, Integer> {
 
-    List<Reservation> getAllByReservationDate(LocalDate date);
+    List<Reservation> getAllByReservationDateOrderByStartTime(LocalDate date);
 
     Reservation save(Reservation reservation);
 

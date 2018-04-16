@@ -3,6 +3,7 @@ package gov.dhs.uscis.odos2.reservation.service;
 import gov.dhs.uscis.odos2.reservation.exception.InvalidReservationException;
 import gov.dhs.uscis.odos2.reservation.model.Reservation;
 import gov.dhs.uscis.odos2.reservation.repository.ReservationRepository;
+import gov.dhs.uscis.odos2.reservation.util.ReservationConflictHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,33 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private ReservationConflictHelper reservationConflictHelper;
+
     @Override
     public Reservation createNewReservation(Reservation reservation) throws InvalidReservationException {
 
+        validateReservationValues(reservation);
+
+        checkConflicts(reservation);
+
+        reservation.setCreateBy(1);
+        reservation.setCreateDate(LocalDateTime.now());
+
+        return reservationRepository.save(reservation);
+    }
+
+    private void checkConflicts(Reservation reservation) throws InvalidReservationException {
+        List<Reservation> reservationList = reservationRepository
+                .getAllByReservationDateOrderByStartTime(reservation.getReservationDate());
+
+        // Let's look for any overlaping
+        if (reservationConflictHelper.isThereConflict(reservationList, reservation)) {
+            throw new InvalidReservationException("The reservation is invalid due to a conflict");
+        }
+    }
+
+    private void validateReservationValues(Reservation reservation) throws InvalidReservationException {
         if (reservation != null
                 && reservation.getReservationDate() != null
                 && reservation.getStartTime() != null
@@ -39,13 +64,8 @@ public class ReservationServiceImpl implements ReservationService {
             }
 
         } else {
-            throw new IllegalArgumentException("Reservation is empty");
+            throw new IllegalArgumentException("Reservation required values missing");
         }
-
-        reservation.setCreateBy(1);
-        reservation.setCreateDate(LocalDateTime.now());
-
-        return reservationRepository.save(reservation);
     }
 
     @Override
@@ -55,6 +75,6 @@ public class ReservationServiceImpl implements ReservationService {
             throw new IllegalArgumentException("Invalid date");
         }
 
-        return reservationRepository.getAllByReservationDate(date);
+        return reservationRepository.getAllByReservationDateOrderByStartTime(date);
     }
 }

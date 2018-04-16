@@ -3,6 +3,7 @@ package gov.dhs.uscis.odos2.reservation.service;
 
 import gov.dhs.uscis.odos2.reservation.exception.InvalidReservationException;
 import gov.dhs.uscis.odos2.reservation.repository.ReservationRepository;
+import gov.dhs.uscis.odos2.reservation.util.ReservationConflictHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,10 @@ public class ReservationQueryTest {
         public ReservationService reservationService() {
             return new ReservationServiceImpl();
         }
+        @Bean
+        public ReservationConflictHelper reservationConflictHelper() {
+            return new ReservationConflictHelper();
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -44,7 +49,7 @@ public class ReservationQueryTest {
         LocalDate date = LocalDate.now();
 
         reservationService.getReservationsByDate(date);
-        verify(reservationRepository).getAllByReservationDate(date);
+        verify(reservationRepository).getAllByReservationDateOrderByStartTime(date);
 
     }
 
