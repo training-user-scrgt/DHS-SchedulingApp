@@ -1,4 +1,4 @@
-FROM salientcrgt/odos2-res-fe-ngrunner:latest
+FROM salientcrgt/odos2-res-app-ngrunner:latest
 
 MAINTAINER Pramod Malhotra <pramod.malhotra@salientcrgt.com>
 
