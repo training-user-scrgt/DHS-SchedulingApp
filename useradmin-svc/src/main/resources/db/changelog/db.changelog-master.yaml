@@ -20,6 +20,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: token
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
                   name: first_name
                   type: varchar(200)
                   constraints:
@@ -77,13 +82,11 @@ databaseChangeLog:
                   type: int
                   autoIncrement: true
                   constraints:
-                    primaryKey: true
                     nullable: false
               - column:
                   name: role_id
-                  type: varchar(200)
+                  type: int
                   constraints:
-                    primaryKey: true
                     nullable: false
         - addForeignKeyConstraint:
             baseColumnNames: created_by
@@ -105,26 +108,34 @@ databaseChangeLog:
             onUpdate: RESTRICT
             referencedColumnNames: id
             referencedTableName: users
+        - addUniqueConstraint:
+            columnNames: id
+            constraintName: fk_user_roles_users_id
+            tableName: users
+        - addUniqueConstraint:
+            columnNames: id
+            constraintName: fk_user_roles_roles_id
+            tableName: roles
         - addForeignKeyConstraint:
-            baseColumnNames: id
-            baseTableName: users
+            baseColumnNames: user_id
+            baseTableName: user_roles
             constraintName: fk_user_roles_users_id
             deferrable: true
             initiallyDeferred: true
             onDelete: CASCADE
             onUpdate: RESTRICT
-            referencedColumnNames: user_id
-            referencedTableName: user_roles
+            referencedColumnNames: id
+            referencedTableName: users
         - addForeignKeyConstraint:
-            baseColumnNames: id
-            baseTableName: roles
+            baseColumnNames: role_id
+            baseTableName: user_roles
             constraintName: fk_user_roles_roles_id
             deferrable: true
             initiallyDeferred: true
             onDelete: CASCADE
             onUpdate: RESTRICT
-            referencedColumnNames: role_id
-            referencedTableName: user_roles
+            referencedColumnNames: id
+            referencedTableName: roles
   - changeSet:
       id: 2
       author: karthik.krishnan

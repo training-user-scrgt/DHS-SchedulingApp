@@ -14,7 +14,10 @@ public class Users {
     private Integer id;
 
     @Column(name = "username", nullable = false, length = 200)
-    private String userName;
+    private String username;
+
+    @Column(name = "token", nullable = false, length = 200)
+    private String token;
 
     @Column(name = "first_name", nullable = false, length = 200)
     private String firstName;
@@ -51,11 +54,19 @@ public class Users {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getFirstName() {
@@ -130,7 +141,7 @@ public class Users {
     public String toString() {
         return "Users{" +
                 "id=" + id +
-                ", userName=" + userName +
+                ", userName=" + username +
                 ", firstName=" + firstName +
                 ", lastName=" + lastName +
                 getRolesAsString() +
@@ -146,13 +157,13 @@ public class Users {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users that = (Users) o;
-        return userName == that.userName &&
+        return username == that.username &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName, firstName, lastName);
+        return Objects.hash(username, firstName, lastName);
     }
 }
