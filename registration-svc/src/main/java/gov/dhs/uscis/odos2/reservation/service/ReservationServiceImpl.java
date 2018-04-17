@@ -8,9 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.List;
 
 @Service
@@ -52,6 +50,33 @@ public class ReservationServiceImpl implements ReservationService {
                 && reservation.getStartTime() != null
                 && reservation.getEndTime() != null
                 && StringUtils.isNoneEmpty(reservation.getConferenceTitle())) {
+
+            if (reservation.getReservationDate().isBefore(LocalDate.now())) {
+                throw new InvalidReservationException("You can't make a reservation in the past");
+            }
+
+            if (reservation.getReservationDate().getDayOfWeek() == DayOfWeek.SATURDAY
+                    || reservation.getReservationDate().getDayOfWeek() == DayOfWeek.SUNDAY) {
+                throw new InvalidReservationException("Reservations are only allowed form Monday to Friday");
+            }
+
+            if ((reservation.getStartTime().getMinute() != 0
+                    && reservation.getStartTime().getMinute() != 15
+                    && reservation.getStartTime().getMinute() != 30
+                    && reservation.getStartTime().getMinute() != 45) ||
+                    (reservation.getEndTime().getMinute() != 0
+                    && reservation.getEndTime().getMinute() != 15
+                    && reservation.getEndTime().getMinute() != 30
+                    && reservation.getEndTime().getMinute() != 45)) {
+
+                throw new InvalidReservationException("Reservations are only allowed in interval of 15 minutes");
+            }
+
+            if (reservation.getStartTime().isBefore(LocalTime.of(8, 0))
+                    || reservation.getEndTime().isAfter(LocalTime.of(17, 0))) {
+
+                throw new InvalidReservationException("Reservations are only allowed between 0800 and 1700");
+            }
 
             // Minimum reservation time is 30 minutes
             if (Duration.between(reservation.getStartTime(), reservation.getEndTime()).toMinutes() < 30) {
