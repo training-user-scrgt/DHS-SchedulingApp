@@ -1,0 +1,196 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ramkumar.pitchumani
+      changes:
+        - createTable:
+            tableName: building
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: building_name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_by
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: update_id
+                  type: int
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: equipment
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: equipment_name
+                  type: varchar(300)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_by
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: update_id
+                  type: int
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: room
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: building_id
+                  type: int
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: room_name
+                  type: varchar(300)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: capacity
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: available
+                  type: boolean
+                  constraints:
+                    nullable: false                    
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_by
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: update_id
+                  type: int
+                  constraints:
+                    nullable: true    
+        - createTable:
+            tableName: room_equipment
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: room_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: equipment_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_by
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: update_id
+                  type: int
+                  constraints:
+                    nullable: true                                                        
+        - addForeignKeyConstraint:
+            baseColumnNames: building_id
+            baseTableName: room
+            constraintName: fk_building_room
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: building                                        
+        - addForeignKeyConstraint:
+            baseColumnNames: room_id
+            baseTableName: room_equipment
+            constraintName: fk_room_room_equipment
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: room                                        
+        - addForeignKeyConstraint:
+            baseColumnNames: equipment_id
+            baseTableName: room_equipment
+            constraintName: fk_equipment_room_equipment
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: equipment                                                    

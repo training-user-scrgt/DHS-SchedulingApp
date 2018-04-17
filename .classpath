@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="inventory-svc/src/main/java"/>
+	<classpathentry kind="src" path="inventory-svc/src/test/java"/>
+	<classpathentry kind="src" path="registration-svc/src/main/java"/>
+	<classpathentry kind="src" path="registration-svc/src/test/java"/>
+	<classpathentry kind="lib" path="inventory-svc/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="inventory-svc/bin/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="registration-svc/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="registration-svc/bin/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="output" path="inventory-svc/target/classes"/>
+</classpath>
