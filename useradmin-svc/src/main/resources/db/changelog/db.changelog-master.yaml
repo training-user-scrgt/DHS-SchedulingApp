@@ -20,16 +20,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: login_token
-                  type: varchar(200)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: role_id
-                  type: int
-                  constraints:
-                    nullable: false
-              - column:
                   name: first_name
                   type: varchar(200)
                   constraints:
@@ -74,6 +64,27 @@ databaseChangeLog:
                   type: varchar(200)
                   constraints:
                     nullable: false
+              - column:
+                  name: description
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: varchar(200)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
         - addForeignKeyConstraint:
             baseColumnNames: created_by
             baseTableName: users
@@ -95,15 +106,25 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: users
         - addForeignKeyConstraint:
-            baseColumnNames: role_id
+            baseColumnNames: id
             baseTableName: users
-            constraintName: fk_users_role_id
+            constraintName: fk_user_roles_users_id
             deferrable: true
             initiallyDeferred: true
             onDelete: CASCADE
             onUpdate: RESTRICT
-            referencedColumnNames: id
-            referencedTableName: roles
+            referencedColumnNames: user_id
+            referencedTableName: user_roles
+        - addForeignKeyConstraint:
+            baseColumnNames: id
+            baseTableName: roles
+            constraintName: fk_user_roles_roles_id
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: role_id
+            referencedTableName: user_roles
   - changeSet:
       id: 2
       author: karthik.krishnan
@@ -118,6 +139,9 @@ databaseChangeLog:
               - column:
                   name: role
                   value: "User"
+              - column:
+                  name: description
+                  value: "A User of the system"
         - insert:
             tableName: roles
             columns:
@@ -127,6 +151,9 @@ databaseChangeLog:
               - column:
                   name: role
                   value: "Administrator"
+              - column:
+                  name: description
+                  value: "An Administrator of the system"
         - insert:
             tableName: roles
             columns:
@@ -136,12 +163,6 @@ databaseChangeLog:
               - column:
                   name: role
                   value: "Report Manager"
-        - insert:
-            tableName: roles
-            columns:
               - column:
-                  name: id
-                  value: "3"
-              - column:
-                  name: role
-                  value: "Panel"
+                  name: description
+                  value: "A Report Manager of the system"
