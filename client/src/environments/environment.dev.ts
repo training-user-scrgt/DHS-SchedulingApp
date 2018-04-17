@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080'
+  apiUrl: 'http://dev-backend-fec-ef-app.b9ad.pro-us-east-1.openshiftapps.com'
 };
