@@ -1,6 +1,6 @@
-FROM salientcrgt/odos2-res-fe-ngrunner:latest
+FROM salientcrgt/odos2-res-app-ngrunner:latest
 
-MAINTAINER Cris Daniluk <pramod.malhotra@salientcrgt.com>
+MAINTAINER Pramod Malhotra <pramod.malhotra@salientcrgt.com>
 
 ARG env
 
