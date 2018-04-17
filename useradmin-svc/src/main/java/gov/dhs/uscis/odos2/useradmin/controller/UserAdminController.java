@@ -36,7 +36,8 @@ public class UserAdminController {
         return userAdminService.findAllUsers();
     }
 
-    @PostMapping
+    //post for modify, push for
+    @PutMapping
     public ResponseEntity<Void> addUser(@RequestBody Users user, UriComponentsBuilder builder) {
         HttpHeaders headers = new HttpHeaders();
         try {

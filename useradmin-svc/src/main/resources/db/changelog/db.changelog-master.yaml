@@ -9,8 +9,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
-                  autoIncrement: true
+                  type: uuid
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -41,7 +40,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: created_by
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: false
               - column:
@@ -51,7 +50,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: updated_by
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: false
         - createTable:
@@ -79,8 +78,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: user_id
-                  type: int
-                  autoIncrement: true
+                  type: uuid
                   constraints:
                     nullable: false
               - column:

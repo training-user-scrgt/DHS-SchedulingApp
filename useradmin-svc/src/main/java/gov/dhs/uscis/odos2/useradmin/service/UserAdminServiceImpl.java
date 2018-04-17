@@ -5,11 +5,14 @@ import gov.dhs.uscis.odos2.useradmin.exception.InvalidUserException;
 import gov.dhs.uscis.odos2.useradmin.model.Users;
 import gov.dhs.uscis.odos2.useradmin.repository.UsersRepository;
 import gov.dhs.uscis.odos2.useradmin.service.UserAdminService;
+
+import org.hibernate.id.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserAdminServiceImpl implements UserAdminService {
@@ -31,6 +34,7 @@ public class UserAdminServiceImpl implements UserAdminService {
 
         //check if user exists. throw error? modify anyway?
 
+        user.setId(UUID.randomUUID());
         user.setCreatedDate(LocalDateTime.now());
         user.setUpdatedDate(LocalDateTime.now());
 
