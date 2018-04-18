@@ -1,5 +1,8 @@
 package gov.dhs.uscis.odos2.reservation.model;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -142,17 +145,28 @@ public class Reservation {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+
         if (o == null || getClass() != o.getClass()) return false;
+
         Reservation that = (Reservation) o;
-        return roomId == that.roomId &&
-                Objects.equals(reservationDate, that.reservationDate) &&
-                Objects.equals(startTime, that.startTime) &&
-                Objects.equals(endTime, that.endTime);
+
+        return new EqualsBuilder()
+                .append(reservationDate, that.reservationDate)
+                .append(startTime, that.startTime)
+                .append(endTime, that.endTime)
+                .append(roomId, that.roomId)
+                .append(conferenceTitle, that.conferenceTitle)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(reservationDate, startTime, endTime, roomId);
+        return new HashCodeBuilder(17, 37)
+                .append(reservationDate)
+                .append(startTime)
+                .append(endTime)
+                .append(roomId)
+                .append(conferenceTitle)
+                .toHashCode();
     }
 }
