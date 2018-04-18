@@ -10,15 +10,15 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class AppComponent {
   title = 'DHS Scheduling Application';
 
-  constructor(private router: Router){
-		this.router = router;
-  }
+  // constructor(private router: Router){
+	// 	this.router = router;
+  // }
   
-  isLoggedIn(){
-		return this.router.url !== '/';
-	}
+  // isLoggedIn(){
+	// 	return this.router.url !== '/';
+	// }
 
-  onLogout(_isLoggedIn: boolean) {
-		this.router.navigate(['login']);
-	}
+  // onLogout(_isLoggedIn: boolean) {
+	// 	this.router.navigate(['login']);
+	// }
 }

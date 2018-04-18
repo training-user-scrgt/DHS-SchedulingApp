@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+// import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -6,17 +7,17 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  @Input()  isLoggedIn: boolean;
-  @Output() onLogout = new EventEmitter<boolean>();
+  // @Input()  isLoggedIn: boolean;
+  // @Output() onLogout = new EventEmitter<boolean>();
   
-  logout() {
-	  this.onLogout.emit(this.isLoggedIn);
-  }
+  // logout() {
+	//   this.onLogout.emit(this.isLoggedIn);
+  // }
 }
