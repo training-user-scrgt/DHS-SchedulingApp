@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/useradmin")
+@RequestMapping("/user")
 public class UserAdminController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(UserAdminController.class);
@@ -26,13 +26,13 @@ public class UserAdminController {
     @Autowired
     private UserAdminService userAdminService;
 
-    @RequestMapping(value ="/getallusers", method = RequestMethod.GET)
+    @GetMapping
     @PreAuthorize("hasAuthority('Administrator')")
     public List<Users> getUsers(){
         return userAdminService.findAllUsers();
     }
 
-    @PutMapping(value = "/users/{id}")
+    @PostMapping
     public ResponseEntity<Void> addUser(@RequestBody Users user, UriComponentsBuilder builder) {
         HttpHeaders headers = new HttpHeaders();
         try {
@@ -46,11 +46,11 @@ public class UserAdminController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/users/{id}")
-    public ResponseEntity<Void> modifyUser(@RequestBody Users user, UriComponentsBuilder builder) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> modifyUser(@PathVariable String id, @RequestBody Users user, UriComponentsBuilder builder) {
         HttpHeaders headers = new HttpHeaders();
         try {
-            Users modifiedUser = userAdminService.modifyExistingUser(user);
+            Users modifiedUser = userAdminService.modifyExistingUser(UUID.fromString(id), user);
             headers.setLocation(builder.path("/users/{id}").buildAndExpand(modifiedUser.getId()).toUri());
 
         } catch (InvalidUserException e) {
@@ -60,11 +60,11 @@ public class UserAdminController {
         return new ResponseEntity<Void>(headers, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/users/{id}")
-    public ResponseEntity<Void> removeUser(@RequestBody UUID userID, UriComponentsBuilder builder) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> removeUser(@PathVariable String id, UriComponentsBuilder builder) {
         HttpHeaders headers = new HttpHeaders();
         try {
-           userAdminService.deleteUser(userID);
+           userAdminService.deleteUser(UUID.fromString(id));
            //headers.setLocation(builder.path("/users/{id}").buildAndExpand(userID).toUri());
 
         } catch (InvalidUserException e) {
