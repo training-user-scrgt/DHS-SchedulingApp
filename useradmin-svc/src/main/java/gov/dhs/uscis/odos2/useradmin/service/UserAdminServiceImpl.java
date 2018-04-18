@@ -46,12 +46,14 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     @Override
-    public void modifyExistingUser(Users user) throws InvalidUserException {
+    public Users modifyExistingUser(Users user) throws InvalidUserException {
 
         if ( usersRepository.findByUsername(user.getUserName()) == null ) {
             throw new InvalidUserException("User does not exist");
         }
         user.setUpdatedDate(LocalDateTime.now());
+
+        return usersRepository.save(user);
     }
 
     @Override
