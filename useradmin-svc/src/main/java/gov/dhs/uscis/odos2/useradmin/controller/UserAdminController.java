@@ -37,7 +37,7 @@ public class UserAdminController {
         HttpHeaders headers = new HttpHeaders();
         try {
             Users newUser = userAdminService.createNewUser(user);
-            headers.setLocation(builder.path("/users/{id}").buildAndExpand(newUser.getId()).toUri());
+            headers.setLocation(builder.path("/user/{id}").buildAndExpand(newUser.getId()).toUri());
 
         } catch (UserAlreadyExistsException e) {
             LOGGER.error(e.getMessage(), e);
@@ -51,7 +51,7 @@ public class UserAdminController {
         HttpHeaders headers = new HttpHeaders();
         try {
             Users modifiedUser = userAdminService.modifyExistingUser(UUID.fromString(id), user);
-            headers.setLocation(builder.path("/users/{id}").buildAndExpand(modifiedUser.getId()).toUri());
+            headers.setLocation(builder.path("/user/{id}").buildAndExpand(modifiedUser.getId()).toUri());
 
         } catch (InvalidUserException e) {
             LOGGER.error(e.getMessage(), e);

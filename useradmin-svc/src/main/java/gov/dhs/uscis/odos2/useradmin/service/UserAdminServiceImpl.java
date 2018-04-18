@@ -47,8 +47,9 @@ public class UserAdminServiceImpl implements UserAdminService {
         UUID userID = UUID.randomUUID();
         user.setId(userID);
         user.setCreatedDate(LocalDateTime.now());
-        //user.setCreatedBy(method to pull user from saml)
-        //user.setUpdatedBy(method to pull user from saml)
+        //random till pulled from token
+        user.setCreatedBy(UUID.randomUUID());
+        user.setUpdatedBy(UUID.randomUUID());
         user.setUpdatedDate(LocalDateTime.now());
 
         //default role if none exists
@@ -71,7 +72,7 @@ public class UserAdminServiceImpl implements UserAdminService {
         }
         
         existingUser.setFirstName(user.getFirstName());
-        existingUser.setLaststName(user.getLastName());
+        existingUser.setLastName(user.getLastName());
         //user.setUpdatedBy(method to pull user from saml)
         existingUser.setUpdatedDate(LocalDateTime.now());
         
