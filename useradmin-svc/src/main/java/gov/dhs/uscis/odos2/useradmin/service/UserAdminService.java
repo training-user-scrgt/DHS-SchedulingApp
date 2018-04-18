@@ -13,7 +13,7 @@ public interface UserAdminService {
 
     Users createNewUser(Users user) throws UserAlreadyExistsException;
 
-    void modifyExistingUser(Users user) throws InvalidUserException;
+    Users modifyExistingUser(Users user) throws InvalidUserException;
     
     void deleteUser(UUID userID) throws InvalidUserException;
 }

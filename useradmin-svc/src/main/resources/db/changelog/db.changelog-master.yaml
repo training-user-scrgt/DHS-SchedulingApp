@@ -77,6 +77,13 @@ databaseChangeLog:
             tableName: user_roles
             columns:
               - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
                   name: user_id
                   type: uuid
                   constraints:

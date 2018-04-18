@@ -50,14 +50,14 @@ public class UserAdminController {
     public ResponseEntity<Void> modifyUser(@RequestBody Users user, UriComponentsBuilder builder) {
         HttpHeaders headers = new HttpHeaders();
         try {
-            userAdminService.modifyExistingUser(user);
-            headers.setLocation(builder.path("/users/{id}").buildAndExpand(user.getId()).toUri());
+            Users modifiedUser = userAdminService.modifyExistingUser(user);
+            headers.setLocation(builder.path("/users/{id}").buildAndExpand(modifiedUser.getId()).toUri());
 
         } catch (InvalidUserException e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<Void>(headers, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<Void>(headers, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/users/{id}")
