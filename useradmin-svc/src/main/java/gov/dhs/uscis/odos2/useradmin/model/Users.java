@@ -3,6 +3,7 @@ package gov.dhs.uscis.odos2.useradmin.model;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.List;
 
 @Entity(name = "users")
@@ -11,7 +12,7 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "username", nullable = false, length = 200)
     private String username;
@@ -29,13 +30,13 @@ public class Users {
     private LocalDateTime createdDate;
 
     @Column(name = "created_by", nullable = false)
-    private Integer createdBy;
+    private UUID createdBy;
 
     @Column(name = "updated_date", nullable = false)
     private LocalDateTime updatedDate;
 
     @Column(name = "updated_by", nullable = false)
-    private Integer updatedBy;
+    private UUID updatedBy;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns
@@ -45,11 +46,11 @@ public class Users {
                     referencedColumnName = "id"))
     private List<Roles> roles;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -93,11 +94,11 @@ public class Users {
         this.createdDate = createdDate;
     }
 
-    public Integer getCreatedBy() {
+    public UUID getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Integer createdBy) {
+    public void setCreatedBy(UUID createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -109,11 +110,11 @@ public class Users {
         this.updatedDate = updatedDate;
     }
 
-    public Integer getUpdatedBy() {
+    public UUID getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(Integer updatedBy) {
+    public void setUpdatedBy(UUID updatedBy) {
         this.updatedBy = updatedBy;
     }
 
