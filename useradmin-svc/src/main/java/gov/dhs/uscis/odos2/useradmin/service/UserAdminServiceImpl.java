@@ -3,7 +3,11 @@ package gov.dhs.uscis.odos2.useradmin.service;
 
 import gov.dhs.uscis.odos2.useradmin.exception.InvalidUserException;
 import gov.dhs.uscis.odos2.useradmin.exception.UserAlreadyExistsException;
+import gov.dhs.uscis.odos2.useradmin.model.Roles;
+import gov.dhs.uscis.odos2.useradmin.model.UserRoles;
 import gov.dhs.uscis.odos2.useradmin.model.Users;
+import gov.dhs.uscis.odos2.useradmin.repository.RolesRepository;
+import gov.dhs.uscis.odos2.useradmin.repository.UserRolesRepository;
 import gov.dhs.uscis.odos2.useradmin.repository.UsersRepository;
 import gov.dhs.uscis.odos2.useradmin.service.UserAdminService;
 
@@ -19,6 +23,7 @@ import java.util.UUID;
 public class UserAdminServiceImpl implements UserAdminService {
     @Autowired
     private UsersRepository usersRepository;
+    private UserRolesRepository UserRolesRepository;
 
     @Override
     public Users findByUsername(String username) {
@@ -37,23 +42,27 @@ public class UserAdminServiceImpl implements UserAdminService {
             throw new UserAlreadyExistsException("User already exists");
         }
         //make sure UUID is random
-        UUID userID = UUID.randomUUID();
-        user.setId(userID);
+        //UUID userID = UUID.randomUUID();
+        //user.setId(userID);
         user.setCreatedDate(LocalDateTime.now());
         user.setUpdatedDate(LocalDateTime.now());
-
-        return usersRepository.save(user);
+        return saveUserandRolesFromUser(user);
     }
 
     @Override
     public Users modifyExistingUser(Users user) throws InvalidUserException {
 
-        if ( usersRepository.findByUsername(user.getUserName()) == null ) {
+        Users existingUser = usersRepository.findByUsername(user.getUserName());
+
+        if ( existingUser == null ) {
             throw new InvalidUserException("User does not exist");
         }
         user.setUpdatedDate(LocalDateTime.now());
-
-        return usersRepository.save(user);
+        user.setCreatedBy(existingUser.getCreatedBy());
+        user.setCreatedDate(existingUser.getCreatedDate());
+        
+        usersRepository.delete(existingUser);
+        return saveUserandRolesFromUser(user);
     }
 
     @Override
@@ -62,7 +71,7 @@ public class UserAdminServiceImpl implements UserAdminService {
         if ( usersRepository.findByUsername(userToDelete.getUserName()) == null ) {
             throw new InvalidUserException("User does not exist");
         }
-        usersRepository.delete(userToDelete);
+        deleteUserandRolesFromUser(userToDelete);
     }
 
     private Users findUserByID(UUID userID) {
@@ -73,5 +82,29 @@ public class UserAdminServiceImpl implements UserAdminService {
             }
         }
         return this.findByUsername(username);
+    }
+
+    private Users saveUserandRolesFromUser(Users user) {
+
+        usersRepository.save(user);
+
+        for (Roles roles : user.getRoles()) {
+            UserRoles userRoles = new UserRoles();
+            userRoles.setRoleId(roles.getId());
+            userRoles.setUserId(user.getId());
+            UserRolesRepository.save(userRoles); 
+        }
+
+        return user;
+    }
+
+    private void deleteUserandRolesFromUser(Users user) {
+
+        for (UserRoles userRoles : UserRolesRepository.findAll()) {
+            if (userRoles.getUserId() ==  user.getId()) {
+                UserRolesRepository.delete(userRoles);
+            }
+        }        
+        usersRepository.delete(user);
     }
 }
