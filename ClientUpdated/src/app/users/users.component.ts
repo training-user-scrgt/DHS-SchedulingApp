@@ -7,7 +7,6 @@ import { TdDialogService } from '@covalent/core/dialogs';
 import { TdMediaService } from '@covalent/core/media';
 
 import { UserService, IUser } from './services/user.service';
-import { InventoryService } from '../../services/inventory.service'
 import { Room } from '../../models/room.model';
 
 @Component({
@@ -27,14 +26,12 @@ export class UsersComponent implements OnInit {
               private _snackBarService: MatSnackBar,
               private _userService: UserService,
               private _changeDetectorRef: ChangeDetectorRef,
-              private _inventoryService: InventoryService,
               public media: TdMediaService) {
   }
 
   ngOnInit(): void {
     this._titleService.setTitle('Covalent Users');
     this.load();
-    this.rooms = this._inventoryService.getRooms();
   }
 
   filterUsers(displayName: string = ''): void {
