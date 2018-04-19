@@ -1,0 +1,49 @@
+<td-layout-nav logo="assets:covalent" navigationRoute="/">
+  <div td-toolbar-content layout="row" layout-align="center center" flex>
+    <span>ODOS Reservation Portal</span>
+    <span flex></span>
+  </div>
+  <td-layout-card-over cardTitle="Edit Room Details: {{room.roomName}}" >
+    <ng-template tdLoading="room">
+      <mat-card-content class="push-bottom-none">
+        <form #userForm="ngForm">
+          <div layout="row">
+            <mat-form-field flex> 
+              <input matInput
+                      #displayNameElement
+                      #displayNameControl="ngModel"
+                      type="text" 
+                      placeholder="Building" 
+                      [(ngModel)]="room.building.buildingName" 
+                      [ngModelOptions]="{standalone: true}"
+                      name="Building" 
+                      required>
+            </mat-form-field>
+          </div>
+          <div layout="row" class="push-top">
+            <mat-form-field flex> 
+              <input matInput
+                      #emailElement
+                      #emailControl="ngModel"
+                      type="text" 
+                      placeholder="Occupancy" 
+                      [(ngModel)]="room.capacity" 
+                      [ngModelOptions]="{standalone: true}"
+                      name="Occupancy"
+                      required>
+            </mat-form-field>
+          </div>
+          <div layout="row" class="push-top">
+              <mat-slide-toggle [(ngModel)]="room.available"
+              [ngModelOptions]="{standalone: true}" [checked]="[room.Available]">Available</mat-slide-toggle>
+            </div>
+        </form>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="save()">Confirm</button>
+        <button mat-button (click)="goBack()">CANCEL</button>
+      </mat-card-actions>
+    </ng-template>
+  </td-layout-card-over>
+</td-layout-nav>

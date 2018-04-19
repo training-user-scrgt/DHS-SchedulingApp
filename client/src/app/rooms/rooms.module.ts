@@ -21,12 +21,17 @@ import { CovalentLayoutModule } from '@covalent/core/layout';
 import { CovalentDialogsModule } from '@covalent/core/dialogs';
 import { CovalentMediaModule } from '@covalent/core/media';
 import { CovalentLoadingModule } from '@covalent/core/loading';
+import { CovalentDataTableModule } from '@covalent/core/data-table'
 
 import { RoomsComponent } from './rooms.component';
+import { RoomFormComponent } from './roomForm/roomForm.component';
+
+import { roomRoutes } from './rooms.routes'
 
 @NgModule({
   declarations: [
     RoomsComponent,
+    RoomFormComponent,
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     // angular modules
@@ -52,8 +57,9 @@ import { RoomsComponent } from './rooms.component';
     CovalentLayoutModule,
     CovalentSearchModule,
     CovalentCommonModule,
+    CovalentDataTableModule,
     // extra
-    //userRoutes,
+    roomRoutes,
   ], // modules needed to run this module
   providers: [
     //{ provide: USERS_API, useValue: ''},

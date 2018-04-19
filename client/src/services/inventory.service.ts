@@ -13,6 +13,7 @@ export class InventoryService {
 
     public baseUrl = environment.apiUrl; 
     private readonly _roomsUrl: string = "/rooms";
+    private readonly _roomByIdUrl: string = "/room";
 
     constructor(protected http: HttpClient) {
  
@@ -22,6 +23,15 @@ export class InventoryService {
         let endpointUrl = this.baseUrl + this._roomsUrl;
 
         return this.http.get<Room[]>(endpointUrl, this.getRequestHeaders())
+            .catch(error => {
+                return Observable.throw(error);//this.handleError(error, () => this.getRoomsEndpoint());
+            });
+    }
+
+    getRoomById(id: string) {
+        let endpointUrl = this.baseUrl + this._roomByIdUrl + "/" + id;
+
+        return this.http.get<Room>(endpointUrl, this.getRequestHeaders())
             .catch(error => {
                 return Observable.throw(error);//this.handleError(error, () => this.getRoomsEndpoint());
             });
