@@ -9,13 +9,21 @@ public class UserRoles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private Integer id;
 
     @Column(name = "user_id", nullable = false)
     private UUID userid;
 
     @Column(name = "role_id", nullable = false)
     private Integer roleid;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public UUID getUserId() {
         return userid;

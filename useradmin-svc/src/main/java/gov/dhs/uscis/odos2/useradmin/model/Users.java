@@ -17,9 +17,6 @@ public class Users {
     @Column(name = "username", nullable = false, length = 200)
     private String username;
 
-    @Column(name = "token", nullable = false, length = 200)
-    private String token;
-
     @Column(name = "first_name", nullable = false, length = 200)
     private String firstName;
 
@@ -60,14 +57,6 @@ public class Users {
 
     public void setUserName(String username) {
         this.username = username;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getFirstName() {

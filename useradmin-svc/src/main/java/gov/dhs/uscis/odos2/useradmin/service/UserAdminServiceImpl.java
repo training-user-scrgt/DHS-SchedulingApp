@@ -24,8 +24,10 @@ import java.util.Collections;
 public class UserAdminServiceImpl implements UserAdminService {
     @Autowired
     private UsersRepository usersRepository;
+    @Autowired
     private RolesRepository rolesRepository;
-    private UserRolesRepository UserRolesRepository;
+    @Autowired
+    private UserRolesRepository userRolesRepository;
 
     @Override
     public Users findByUsername(String username) {
@@ -106,7 +108,7 @@ public class UserAdminServiceImpl implements UserAdminService {
             UserRoles userRoles = new UserRoles();
             userRoles.setRoleId(roles.getId());
             userRoles.setUserId(user.getId());
-            UserRolesRepository.save(userRoles); 
+            userRolesRepository.save(userRoles); 
         }
 
         return user;
@@ -114,9 +116,9 @@ public class UserAdminServiceImpl implements UserAdminService {
 
     private void deleteUserandRolesFromUser(Users user) {
 
-        for (UserRoles userRoles : UserRolesRepository.findAll()) {
+        for (UserRoles userRoles : userRolesRepository.findAll()) {
             if (userRoles.getUserId() ==  user.getId()) {
-                UserRolesRepository.delete(userRoles);
+                userRolesRepository.delete(userRoles);
             }
         }        
         usersRepository.delete(user);

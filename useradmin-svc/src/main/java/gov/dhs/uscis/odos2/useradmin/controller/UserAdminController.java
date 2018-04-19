@@ -45,7 +45,7 @@ public class UserAdminController {
             Users newUser = userAdminService.createNewUser(user);
             headers.setLocation(builder.path("/user/{id}").buildAndExpand(newUser.getId()).toUri());
 
-        } catch (UserAlreadyExistsException e) {
+        } catch (UserAlreadyExistsException | InvalidUserException e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
         }
