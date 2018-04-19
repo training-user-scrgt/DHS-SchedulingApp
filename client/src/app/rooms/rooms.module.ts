@@ -26,7 +26,7 @@ import { CovalentDataTableModule } from '@covalent/core/data-table'
 import { RoomsComponent } from './rooms.component';
 import { RoomFormComponent } from './roomForm/roomForm.component';
 
-import { roomRoutes } from './rooms.routes'
+//import { roomRoutes } from './rooms.routes'
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import { roomRoutes } from './rooms.routes'
     CovalentCommonModule,
     CovalentDataTableModule,
     // extra
-    roomRoutes,
+    // roomRoutes,
   ], // modules needed to run this module
   providers: [
     //{ provide: USERS_API, useValue: ''},
