@@ -1,0 +1,33 @@
+Feature: As an administrator, I shall be able to update and view available conference rooms and buildings
+
+Scenario: Login as an administrator to view the status
+	Given I login as an administrator
+	Then I click on Manage Conference Rooms
+	Then the system displays about all the status for all the conference rooms
+
+Scenario: Login as an administrator to make a room available
+	Given I login as an administrator
+	Then I click on Manage Conference Rooms
+	Then I select a room that is unavailable
+	Then I click on the slider to make it available
+
+
+Scenario: Login as an administrator to make a room unavailable
+	Given I login as an administrator
+	Then I click on Manage Conference Rooms
+	Then I select a room that is available
+	Then I click on the slider to make it unavailable
+
+	
+	
+Scenario: Login as an administrator to view Buildings and Conference Rooms
+Given I login as an administrator
+	Then I click on Manage Conference Rooms
+	Then system displays list of all the Buildings
+		And system displays list of all the Conference Rooms
+
+
+
+
+
+

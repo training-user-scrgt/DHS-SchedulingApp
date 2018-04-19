@@ -1,0 +1,65 @@
+Feature: Update a Reservation
+A Requestor is able to Update a reservation
+
+
+Given I logged in as a Requestor
+	Then system displays all the reservations that I created
+	Then I click on Edit/Cancel Reservation button
+	Then system displays the detailed information about the selected Reservation
+		And system allows me to change the Meeting Name
+		And system allows me to cancel this reservation
+	Then I click on Cancel button
+	Then system takes me back to the Make a Reservation page
+		And system displays a confirmation message about successful deletion
+		And system does not display the deleted reservation anymore
+
+
+
+
+Given I logged in as a Reservation Manager
+	Then system displays all the reservations that I created
+	Then I click on Edit/Cancel Reservation button
+	Then system displays the detailed information about the selected Reservation
+		And system allows me to change the Meeting Name
+		And system allows me to cancel this reservation
+	Then I click on Cancel button
+	Then system takes me back to the Make a Reservation page
+		And system displays a confirmation message about successful deletion
+		And system does not display the deleted reservation anymore
+
+
+
+Given I logged in as an Administrator
+	Then system displays all the reservations that I created
+	Then I click on Edit/Cancel Reservation button
+	Then system displays the detailed information about the selected Reservation
+		And system allows me to change the Meeting Name
+		And system allows me to cancel this reservation
+	Then I click on Cancel button
+	Then system takes me back to the Make a Reservation page
+		And system displays a confirmation message about successful deletion
+		And system does not display the deleted reservation anymore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
