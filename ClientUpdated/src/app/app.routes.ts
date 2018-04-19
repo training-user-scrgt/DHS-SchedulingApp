@@ -5,6 +5,8 @@ import { MainComponent } from './main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 
+import { RoomsComponent } from './rooms/rooms.component'
+
 const routes: Routes = [{
     path: 'login',
     component: LoginComponent,
@@ -17,8 +19,11 @@ const routes: Routes = [{
       }, {
         path: '',
         loadChildren: './users/users.module#UsersModule',
-      },
+      }, 
     ],
+  }, {
+    path: 'rooms',
+    component: RoomsComponent,
   },
 ];
 

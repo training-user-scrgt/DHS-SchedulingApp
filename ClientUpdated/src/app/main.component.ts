@@ -17,6 +17,11 @@ export class MainComponent {
       route: '/users',
       icon: 'people',
     },
+    {
+      title: 'Rooms',
+      route: '/rooms',
+      icon: 'people',
+    },
   ];
 
   constructor(private _router: Router) {}
