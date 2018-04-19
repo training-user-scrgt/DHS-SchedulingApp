@@ -1,0 +1,60 @@
+Feature: scheduling conflict
+As a Requestor, I shall be presented if I attempted to book two conference rooms at the same time
+As a Requestor, I shall be notified that scheduling a conference room is prevented for reservations exceeding three hours
+
+
+Scenario: Scheduling multiple conference rooms on different times
+	Given I logged in as a Reuestor
+		Then I select the following
+			Choose a Date
+			Choose a Location
+			Start Time
+			End Time
+		Then I click on Find a Room
+		Then I select a room
+		Then I click on Confirm Reservation
+		Then I create another reservation for a different time
+
+		
+		
+Scenario: Scheduling same room multiple times
+	Given I logged in as a Reuestor
+		Then I select the following
+			Choose a Date
+			Choose a Location
+			Start Time
+			End Time
+		Then I click on Find a Room
+		Then I select a room
+		Then I click on Confirm Reservation
+		Then I create another reservation for the same day, time and room
+		Then I get an error message
+		And system prevents me from scheduling that same room more than once
+		
+		
+Scenario: Scheduling a room for more than three hours
+	Given I logged in as a Requestor
+		Then I select a Date, a Location
+			And I select a time frame for more than three hours
+		Then system displays an error message
+			And system prevents me from scheduling a room for more than three hours		
+		
+		
+Scenario: Scheduling a time slot when no room is available
+	Given I logged in as a Requestor
+		Then I select a date, location and time frame when there is no room available
+		Then I receive an error message
+			And system prevents me from scheduling a Conference Room		
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

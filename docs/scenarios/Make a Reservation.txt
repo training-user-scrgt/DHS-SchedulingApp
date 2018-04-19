@@ -1,0 +1,119 @@
+Feature: Make a Reservation
+A Requestor is able to create a reservation for a Conference Room
+
+Given I logged in as a Requestor
+	Then I choose the following
+			Choose a Date
+			Choose a Location
+			Start Time
+			End Time
+		And I click on Find a Room button
+	Then system displays all the available Conference Rooms based on the information
+		And all the rooms display follwoing information
+			Conference Room Name
+			Conference Room Number
+			Building Name
+			Selected time-slot
+			Available A/V Equipmint list
+	Then I select a room
+		And I click on Reserve a Room button for the selected room
+	Then the system displays a pop-up window
+	Then I need to enter a Meeting Name
+		And the system displays following buttons
+			Cancel
+			Confirm Reservation
+	then I click on Confirm Reservation
+	Then system takes me back to the Reservation homepage
+		And system displays a message my successful reservation of a room
+		And system displays of my newly created Reservation
+
+
+
+
+
+A Reservation Manager is able to create a reservation for a Conference Room
+
+Given I logged in as a Reservation Manager
+	Then I choose the following
+			Choose a Date
+			Choose a Location
+			Start Time
+			End Time
+		And I click on Find a Room button
+	Then system displays all the available Conference Rooms based on the information
+		And all the rooms display follwoing information
+			Conference Room Name
+			Conference Room Number
+			Building Name
+			Selected time-slot
+			Available A/V Equipmint list
+	Then I select a room
+		And I click on Reserve a Room button for the selected room
+	Then the system displays a pop-up window
+	Then I need to enter a Meeting Name
+		And the system displays following buttons
+			Cancel
+			Confirm Reservation
+	then I click on Confirm Reservation
+	Then system takes me back to the Reservation homepage
+		And system displays a message my successful reservation of a room
+		And system displays of my newly created Reservation
+
+
+An Administrator is able to create a reservation for a Conference Room
+
+Given I am loggedd in as an Administrator
+	Then I choose the following
+			Choose a Date
+			Choose a Location
+			Start Time
+			End Time
+		And I click on Find a Room button
+	Then system displays all the available Conference Rooms based on the information
+		And all the rooms display follwoing information
+			Conference Room Name
+			Conference Room Number
+			Building Name
+			Selected time-slot
+			Available A/V Equipmint list
+	Then I select a room
+		And I click on Reserve a Room button for the selected room
+	Then the system displays a pop-up window
+	Then I need to enter a Meeting Name
+		And the system displays following buttons
+			Cancel
+			Confirm Reservation
+	then I click on Confirm Reservation
+	Then system takes me back to the Reservation homepage
+		And system displays a message about my successful reservation of a room
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
