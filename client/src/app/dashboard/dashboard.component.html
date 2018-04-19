@@ -1,16 +1,19 @@
-<td-layout-nav logo="assets:covalent" navigationRoute="/">
-  <button mat-icon-button td-menu-button tdLayoutToggle>
+<td-layout-nav navigationRoute="/">
+  <!-- <button mat-icon-button td-menu-button tdLayoutToggle>
     <mat-icon>menu</mat-icon>
-  </button>
+  </button> -->
   <div td-toolbar-content layout="row" layout-align="center center" flex>
-    <span>Quickstart</span>
+      <span>
+          <img src="assets/icons/png/DHS_icon_small.png" width="18">
+        ODDS Reservation App
+      </span>
     <span flex></span>
   </div>
   <div class="mat-content" layout-padding flex>
     <div layout-gt-xs="row" layout-align-gt-xs="center start" class="margin">
       <div flex-gt-xs="50">
         <mat-card tdMediaToggle="gt-xs" [mediaClasses]="['push-top-lg']">
-          <mat-card-title>Welcome to the ODOS Reservation Portal:</mat-card-title>
+          <mat-card-title><span id="welcomeId">Welcome to the ODDS Reservation App!</span></mat-card-title>
           <mat-divider></mat-divider>
           <mat-card-content>
             <form #loginForm="ngForm">
