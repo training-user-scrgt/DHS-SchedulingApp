@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -27,6 +28,7 @@ public class ReservationController {
     private ReservationService reservationService;
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ROLE_REQUESTOR','ROLE_ADMIN')")
     public ResponseEntity<Void> addReservation(@RequestBody Reservation reservation, UriComponentsBuilder builder) {
 
         HttpHeaders headers = new HttpHeaders();
@@ -47,6 +49,7 @@ public class ReservationController {
     @GetMapping
     @ResponseBody
     @RequestMapping(value = "/{dateString}")
+    @PreAuthorize("hasAnyAuthority('ROLE_MANAGER','ROLE_ADMIN','ROLE_REQUESTOR')")
     public ResponseEntity<List<Reservation>> getReservationsByDate(@PathVariable String dateString) {
 
         LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
