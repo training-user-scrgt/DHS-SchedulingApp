@@ -16,18 +16,18 @@ public class JwtToken implements Authentication {
 
     private final DecodedJWT jwt;
     private Map<String, Claim> claims;
-    boolean authenticated;
+    private boolean authenticated;
 
     public JwtToken(DecodedJWT jwt) {
         this.jwt = jwt;
         this.authenticated = true;
 
-        this.claims = (this.jwt.getClaims() == null) ? new HashMap<String, Claim>(0) : this.jwt.getClaims();
+        this.claims = (this.jwt.getClaims() == null) ? new HashMap<>(0) : this.jwt.getClaims();
 
     }
 
     public void clearClaims() {
-        this.claims = new HashMap<String, Claim>();
+        this.claims = new HashMap<>();
     }
 
     public DecodedJWT getJwt() {
@@ -82,4 +82,12 @@ public class JwtToken implements Authentication {
         this.authenticated = isAuthenticated;
     }
 
+    @Override
+    public String toString() {
+        return "JwtToken{" +
+                "jwt=" + jwt +
+                ", claims=" + claims +
+                ", authenticated=" + authenticated +
+                '}';
+    }
 }
