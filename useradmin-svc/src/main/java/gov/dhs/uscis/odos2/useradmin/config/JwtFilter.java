@@ -46,7 +46,6 @@ public class JwtFilter extends GenericFilterBean {
             throw new ServletException("Not a valid authentication authHeader");
         }
 
-        // and retrieve the token
         String token = authHeader.substring(7);
 
         try {
