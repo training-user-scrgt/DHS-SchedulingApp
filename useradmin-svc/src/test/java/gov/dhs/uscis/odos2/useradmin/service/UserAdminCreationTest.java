@@ -77,6 +77,7 @@ public class UserAdminCreationTest {
 
     @Test(expected = InvalidUserException.class)
     public void shouldThrowExceptionDueToEmptyEndTime() throws UserAlreadyExistsException, InvalidUserException  {
+        when(rolesRepository.findByRole(any(String.class))).thenReturn(this.role);
         this.user.setFirstName(null);
         Users newUser = useradminService.createNewUser(this.user);
         assertTrue(newUser.getFirstName() == null);

@@ -40,11 +40,16 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     @Override
-    public Users createNewUser(Users user) throws UserAlreadyExistsException {
+    public Users createNewUser(Users user) throws UserAlreadyExistsException, InvalidUserException {
+
+        if (null == user.getUserName() || null == user.getFirstName() || null == user.getLastName()) {
+            throw new InvalidUserException("Invalid input");
+        }
 
         if ( usersRepository.findByUsername(user.getUserName()) != null ) {
             throw new UserAlreadyExistsException("User already exists");
         }
+
         //make sure UUID is random
         UUID userID = UUID.randomUUID();
         user.setId(userID);
@@ -55,8 +60,8 @@ public class UserAdminServiceImpl implements UserAdminService {
         user.setUpdatedDate(LocalDateTime.now());
 
         //default role if none exists
-        if (user.getRoles().size() == 0) {
-            Roles role = rolesRepository.findByRole("User");
+        if (null == user.getRoles()) {
+            Roles role = rolesRepository.findByRole("ROLE_REQUESTOR");
             List<Roles> roles = Collections.singletonList(role);
             user.setRoles(roles);
         }
