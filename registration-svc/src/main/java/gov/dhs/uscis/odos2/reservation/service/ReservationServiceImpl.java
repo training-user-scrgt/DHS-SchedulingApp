@@ -36,7 +36,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     private void checkConflicts(Reservation reservation) throws InvalidReservationException {
         List<Reservation> reservationList = reservationRepository
-                .getAllByReservationDateOrderByStartTime(reservation.getReservationDate());
+                .getAllByReservationDateAndRoomIdOrderByStartTime(
+                        reservation.getReservationDate(),
+                        reservation.getRoomId());
 
         // Let's look for any overlaping
         if (reservationConflictHelper.isThereConflict(reservationList, reservation)) {

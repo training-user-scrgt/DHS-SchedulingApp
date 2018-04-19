@@ -4,5 +4,5 @@ Feature: Reservation
   so that I can hold it for later use
 
   Scenario: Make a reservation
-    Given I make a reservation for today
+    Given I make a reservation
     Then my reservation can be retrieved

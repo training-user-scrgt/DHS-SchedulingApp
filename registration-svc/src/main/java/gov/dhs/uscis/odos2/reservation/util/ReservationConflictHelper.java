@@ -13,37 +13,41 @@ public class ReservationConflictHelper {
         Reservation currentReservation;
         Reservation previousReservation = null;
 
-        for (int i = 0; i < reservationList.size(); i++) {
+        if (reservationList.isEmpty()) {
+            return false;
+        } else {
 
-            currentReservation = reservationList.get(i);
+            for (int i = 0; i < reservationList.size(); i++) {
 
-            // We are in the first reservation of the list
-            if (previousReservation == null) {
+                currentReservation = reservationList.get(i);
 
-                if (!reservation.getEndTime().isAfter(currentReservation.getStartTime())) {
-                    return true;
+                // We are in the first reservation of the list
+                if (previousReservation == null) {
+
+                    if (!reservation.getEndTime().isAfter(currentReservation.getStartTime())) {
+                        return false;
+                    }
                 }
-            } else if (i == reservationList.size() - 1) { // We are in the last reservation
+                if (i == reservationList.size() - 1) { // We are in the last reservation
 
-                if (!reservation.getStartTime().isBefore(currentReservation.getEndTime())) {
-                    return true;
+                    if (!reservation.getStartTime().isBefore(currentReservation.getEndTime())) {
+                        return false;
+                    }
+
                 }
-
-            } else {
 
                 if (!reservation.getEndTime().isAfter(currentReservation.getStartTime()) &&
                         !reservation.getStartTime().isBefore(previousReservation.getEndTime())) {
-                    return true;
+                    return false;
                 }
+
+
+                previousReservation = currentReservation;
 
             }
 
-            previousReservation = currentReservation;
-
+            return true;
         }
-
-        return false;
-
     }
 
 
