@@ -82,7 +82,7 @@ public class Users {
         return lastName;
     }
 
-    public void setLaststName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 

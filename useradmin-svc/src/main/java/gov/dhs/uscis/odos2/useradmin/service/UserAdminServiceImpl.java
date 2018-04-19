@@ -18,11 +18,13 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.Collections;
 
 @Service
 public class UserAdminServiceImpl implements UserAdminService {
     @Autowired
     private UsersRepository usersRepository;
+    private RolesRepository rolesRepository;
     private UserRolesRepository UserRolesRepository;
 
     @Override
@@ -42,27 +44,39 @@ public class UserAdminServiceImpl implements UserAdminService {
             throw new UserAlreadyExistsException("User already exists");
         }
         //make sure UUID is random
-        //UUID userID = UUID.randomUUID();
-        //user.setId(userID);
+        UUID userID = UUID.randomUUID();
+        user.setId(userID);
         user.setCreatedDate(LocalDateTime.now());
+        //random till pulled from token
+        user.setCreatedBy(UUID.randomUUID());
+        user.setUpdatedBy(UUID.randomUUID());
         user.setUpdatedDate(LocalDateTime.now());
+
+        //default role if none exists
+        if (user.getRoles().size() == 0) {
+            Roles role = rolesRepository.findByRole("User");
+            List<Roles> roles = Collections.singletonList(role);
+            user.setRoles(roles);
+        }
+
         return saveUserandRolesFromUser(user);
     }
 
     @Override
-    public Users modifyExistingUser(Users user) throws InvalidUserException {
+    public Users modifyExistingUser(UUID id, Users user) throws InvalidUserException {
 
-        Users existingUser = usersRepository.findByUsername(user.getUserName());
+        Users existingUser = usersRepository.findUsersById(id);
 
         if ( existingUser == null ) {
             throw new InvalidUserException("User does not exist");
         }
-        user.setUpdatedDate(LocalDateTime.now());
-        user.setCreatedBy(existingUser.getCreatedBy());
-        user.setCreatedDate(existingUser.getCreatedDate());
         
-        usersRepository.delete(existingUser);
-        return saveUserandRolesFromUser(user);
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        //user.setUpdatedBy(method to pull user from saml)
+        existingUser.setUpdatedDate(LocalDateTime.now());
+        
+        return saveUserandRolesFromUser(existingUser);
     }
 
     @Override
