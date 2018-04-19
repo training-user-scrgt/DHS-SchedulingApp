@@ -20,10 +20,13 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
@@ -63,6 +66,7 @@ public class ReservationCreationTest {
         this.reservation.setReservationDate(LocalDate.now());
         this.reservation.setStartTime(LocalTime.of(12, 0));
         this.reservation.setEndTime(LocalTime.of(13, 0));
+        this.reservation.setRoomId(1);
     }
 
     @Test(expected = InvalidReservationException.class)
@@ -86,7 +90,6 @@ public class ReservationCreationTest {
         when(reservationConflictHelper
                 .isThereConflict(anyList(), any(Reservation.class))).thenReturn(true);
         reservationService.createNewReservation(this.reservation);
-
     }
 
     @Test(expected = InvalidReservationException.class)

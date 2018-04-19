@@ -21,19 +21,19 @@ public class ReservationConflictHelper {
             if (previousReservation == null) {
 
                 if (!reservation.getEndTime().isAfter(currentReservation.getStartTime())) {
-                    return true;
+                    return false;
                 }
             } else if (i == reservationList.size() - 1) { // We are in the last reservation
 
                 if (!reservation.getStartTime().isBefore(currentReservation.getEndTime())) {
-                    return true;
+                    return false;
                 }
 
             } else {
 
                 if (!reservation.getEndTime().isAfter(currentReservation.getStartTime()) &&
                         !reservation.getStartTime().isBefore(previousReservation.getEndTime())) {
-                    return true;
+                    return false;
                 }
 
             }
@@ -42,7 +42,7 @@ public class ReservationConflictHelper {
 
         }
 
-        return false;
+        return true;
 
     }
 

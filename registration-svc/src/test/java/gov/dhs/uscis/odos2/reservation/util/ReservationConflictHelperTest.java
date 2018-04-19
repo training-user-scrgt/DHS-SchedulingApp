@@ -46,18 +46,21 @@ public class ReservationConflictHelperTest {
         Reservation reservation = new Reservation();
         reservation.setStartTime(LocalTime.of(9, 00));
         reservation.setEndTime(LocalTime.of(10, 00));
+        reservation.setRoomId(1);
 
         reservationList.add(reservation);
 
         reservation = new Reservation();
         reservation.setStartTime(LocalTime.of(12, 00));
         reservation.setEndTime(LocalTime.of(13, 30));
+        reservation.setRoomId(1);
 
         reservationList.add(reservation);
 
         reservation = new Reservation();
         reservation.setStartTime(LocalTime.of(14, 00));
         reservation.setEndTime(LocalTime.of(14, 30));
+        reservation.setRoomId(1);
 
         reservationList.add(reservation);
 
@@ -70,7 +73,7 @@ public class ReservationConflictHelperTest {
         reservation.setStartTime(LocalTime.of(8, 30));
         reservation.setEndTime(LocalTime.of(9, 00));
 
-        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isTrue();
+        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isFalse();
 
     }
 
@@ -81,7 +84,7 @@ public class ReservationConflictHelperTest {
         reservation.setStartTime(LocalTime.of(14, 30));
         reservation.setEndTime(LocalTime.of(16, 00));
 
-        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isTrue();
+        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isFalse();
 
     }
 
@@ -92,7 +95,7 @@ public class ReservationConflictHelperTest {
         reservation.setStartTime(LocalTime.of(10, 00));
         reservation.setEndTime(LocalTime.of(12, 00));
 
-        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isTrue();
+        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isFalse();
 
     }
 
@@ -104,7 +107,7 @@ public class ReservationConflictHelperTest {
         reservation.setStartTime(LocalTime.of(9, 30));
         reservation.setEndTime(LocalTime.of(10, 00));
 
-        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isFalse();
+        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isTrue();
 
     }
 
@@ -115,7 +118,7 @@ public class ReservationConflictHelperTest {
         reservation.setStartTime(LocalTime.of(10, 00));
         reservation.setEndTime(LocalTime.of(12, 30));
 
-        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isFalse();
+        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isTrue();
 
     }
 
@@ -126,7 +129,7 @@ public class ReservationConflictHelperTest {
         reservation.setStartTime(LocalTime.of(8, 00));
         reservation.setEndTime(LocalTime.of(11, 00));
 
-        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isFalse();
+        assertThat(reservationConflictHelper.isThereConflict(reservationList, reservation)).isTrue();
 
     }
 }
