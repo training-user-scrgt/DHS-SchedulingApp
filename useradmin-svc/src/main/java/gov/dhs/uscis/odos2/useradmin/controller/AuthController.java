@@ -35,9 +35,6 @@ public class AuthController {
     @Autowired
     private UsersRepository usersRepository;
 
-    @Value("${jwt.key}")
-    private String key;
-
     @Value("${jwt.secret}")
     private String secret;
 
