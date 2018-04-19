@@ -41,6 +41,8 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { InventoryService } from '../services/inventory.service';
 import { RoomsComponent } from './rooms/rooms.component';
+import { ReservationsComponent } from './reservations/reservations.component';
+import { ReportComponent } from './report/report.component';
 
 const httpInterceptorProviders: Type<any>[] = [
   RequestInterceptor, 
@@ -57,6 +59,8 @@ export function getAPI(): string {
     LoginComponent,
     DashboardComponent,
     RoomsComponent,
+    ReservationsComponent,
+    ReportComponent,
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     // angular modules
