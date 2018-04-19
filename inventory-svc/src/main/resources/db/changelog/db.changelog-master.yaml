@@ -123,7 +123,12 @@ databaseChangeLog:
                   name: update_id
                   type: int
                   constraints:
-                    nullable: true    
+                    nullable: true  
+              - column:
+                  name: room_number
+                  type: varchar(10)
+                  constraints:
+                    nullable: false  
         - createTable:
             tableName: room_equipment
             columns:

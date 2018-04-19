@@ -38,7 +38,7 @@ public interface RoomEquipmentRepository extends CrudRepository<RoomEquipment, I
      * @param roomEquipmentId roomEquipment id
      */
     void deleteByRoomEquipmentId(int roomEquipmentId);
-
+    
     /**
      * save changes made to a roomEquipment, or create the roomEquipment if its a new.
      *

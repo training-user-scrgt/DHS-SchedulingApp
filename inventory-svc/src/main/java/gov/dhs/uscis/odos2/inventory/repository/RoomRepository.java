@@ -44,5 +44,12 @@ public interface RoomRepository extends CrudRepository<Room, Integer> {
      * @return new room object
      */
     Room save(Room room);
+    
+    /**
+     * finds a list of rooms available
+     *
+     * @return a List of rooms available.
+     */
+    List<Room> findRoomByAvailable(boolean value);
 
 }

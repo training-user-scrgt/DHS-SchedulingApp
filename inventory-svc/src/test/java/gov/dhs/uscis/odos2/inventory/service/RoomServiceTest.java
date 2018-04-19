@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import gov.dhs.uscis.odos2.inventory.exception.InvalidInventoryException;
 import gov.dhs.uscis.odos2.inventory.model.Building;
 import gov.dhs.uscis.odos2.inventory.model.Equipment;
 import gov.dhs.uscis.odos2.inventory.model.Room;
@@ -50,20 +51,20 @@ public class RoomServiceTest {
 
         @Bean
         public RoomService roomService() {
-            return new RoomService();
+            return new RoomServiceImpl();
         }
     }
     
     @Before
     public void setUp() {
         this.room = new Room();
-        this.room.setRoomId(1);
+        this.room.setRoomId(3);
         this.room.setRoomName("Room 1");
         this.room.setAvailable(true);
         this.room.setCapacity(10);
         
         Building building = new Building();
-        building.setBuildingId(1);
+        building.setBuildingId(2);
         building.setBuildingName("Building 1");
         
         this.room.setBuilding(building);
@@ -104,7 +105,7 @@ public class RoomServiceTest {
     }
 
     @Test
-    public void shouldAddEquipment() {
+    public void shouldAddEquipment() throws InvalidInventoryException {
     	
     	RoomEquipment roomEquipment = new RoomEquipment();
     	roomEquipment.setRoomEquipmentId(1);
@@ -119,13 +120,13 @@ public class RoomServiceTest {
     	when(equipmentRepository.findByEquipmentId(any(Integer.class))).thenReturn(equipment);
     	when(roomEquipmentRepository.save(any(RoomEquipment.class))).thenReturn(roomEquipment);
     	
-    	RoomEquipment roomEquipmentResult = roomService.AddEquipment(1, 1);
+    	RoomEquipment roomEquipmentResult = roomService.addEquipment(roomEquipment);
     	assertThat(roomEquipmentResult).isNotNull();
     }
 
     @Test
     public void shouldRemoveEquipment() {
-    	roomService.RemoveEquipment(1);
+    	roomService.removeRoomEquipment(1);
     	verify(roomEquipmentRepository).deleteByRoomEquipmentId(1);
     }
 }
