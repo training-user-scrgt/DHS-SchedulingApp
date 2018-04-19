@@ -27,20 +27,20 @@ public class ReservationConflictHelper {
                     if (!reservation.getEndTime().isAfter(currentReservation.getStartTime())) {
                         return false;
                     }
-                } else if (i == reservationList.size() - 1) { // We are in the last reservation
+                }
+                if (i == reservationList.size() - 1) { // We are in the last reservation
 
                     if (!reservation.getStartTime().isBefore(currentReservation.getEndTime())) {
                         return false;
                     }
 
-                } else {
-
-                    if (!reservation.getEndTime().isAfter(currentReservation.getStartTime()) &&
-                            !reservation.getStartTime().isBefore(previousReservation.getEndTime())) {
-                        return false;
-                    }
-
                 }
+
+                if (!reservation.getEndTime().isAfter(currentReservation.getStartTime()) &&
+                        !reservation.getStartTime().isBefore(previousReservation.getEndTime())) {
+                    return false;
+                }
+
 
                 previousReservation = currentReservation;
 
