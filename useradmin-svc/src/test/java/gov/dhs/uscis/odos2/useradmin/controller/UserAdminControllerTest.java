@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.security.core.Authentication;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -48,6 +49,9 @@ public class UserAdminControllerTest {
     private UserAdminService userAdminService;
 
     @MockBean
+    private AuthController authcontroller;
+
+    @MockBean
     private Authentication authentication;
 
     @Before
@@ -71,7 +75,7 @@ public class UserAdminControllerTest {
         user.setId(UUID.randomUUID());
 
         when(userAdminService.createNewUser(any(Users.class))).thenReturn(user);
-        when(authentication.isAuthenticated()).thenReturn(true);
+        when(authcontroller.getJWTToken((any(Authentication.class)))).thenReturn(ResponseEntity.ok(ResponseEntity.class));
 
 
         mvc.perform(post("/user").with(authentication(authentication))

@@ -67,7 +67,7 @@ public class AuthController {
 
                 Calendar c = Calendar.getInstance();
                 Date now = c.getTime();
-                c.add(Calendar.SECOND, 15);
+                c.add(Calendar.SECOND, expiration);
                 Date expirationDate = c.getTime();
 
                 Map<String, Object> headerClaims = new HashMap<>(1);

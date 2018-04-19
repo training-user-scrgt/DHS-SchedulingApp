@@ -76,7 +76,23 @@ public class UserAdminCreationTest {
     }
 
     @Test(expected = InvalidUserException.class)
-    public void shouldThrowExceptionDueToEmptyEndTime() throws UserAlreadyExistsException, InvalidUserException  {
+    public void shouldThrowExceptionDueToEmptyUsername() throws UserAlreadyExistsException, InvalidUserException  {
+        when(rolesRepository.findByRole(any(String.class))).thenReturn(this.role);
+        this.user.setUserName(null);
+        Users newUser = useradminService.createNewUser(this.user);
+        assertTrue(newUser.getFirstName() == null);
+    }
+
+    @Test(expected = InvalidUserException.class)
+    public void shouldThrowExceptionDueToEmptyLastName() throws UserAlreadyExistsException, InvalidUserException  {
+        when(rolesRepository.findByRole(any(String.class))).thenReturn(this.role);
+        this.user.setLastName(null);
+        Users newUser = useradminService.createNewUser(this.user);
+        assertTrue(newUser.getFirstName() == null);
+    }
+
+    @Test(expected = InvalidUserException.class)
+    public void shouldThrowExceptionDueToEmptyFirstName() throws UserAlreadyExistsException, InvalidUserException  {
         when(rolesRepository.findByRole(any(String.class))).thenReturn(this.role);
         this.user.setFirstName(null);
         Users newUser = useradminService.createNewUser(this.user);
