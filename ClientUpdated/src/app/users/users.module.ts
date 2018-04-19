@@ -28,6 +28,7 @@ import { UsersFormComponent } from './form/form.component';
 import { userRoutes } from './users.routes';
 
 import { USER_PROVIDER, USERS_API } from './services/user.service';
+
 @NgModule({
   declarations: [
     UsersComponent,
@@ -63,6 +64,7 @@ import { USER_PROVIDER, USERS_API } from './services/user.service';
   providers: [
     { provide: USERS_API, useValue: ''},
     USER_PROVIDER,
+    
   ],
 })
 export class UsersModule {}

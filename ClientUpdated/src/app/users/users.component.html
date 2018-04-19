@@ -62,35 +62,13 @@
           <div class="pad" *ngIf="filteredUsers?.length === 0" layout="row" layout-align="center center">
             <h3>No users to display.</h3>
           </div>
-          <ng-template let-user let-last="last" ngFor [ngForOf]="filteredUsers">
+          <ng-template let-room let-last="last" ngFor [ngForOf]="rooms">
             <mat-list-item>
               <mat-icon matListAvatar>person</mat-icon>
-              <h3 matLine> {{user.displayName}} </h3>
-              <p matLine> {{user.email}} </p>
-              <p matLine hide-gt-md class="mat-caption"> last login: {{ user.lastAccess | timeAgo }} </p>
-              <span flex></span>
-              <span hide-xs hide-sm hide-md flex-gt-xs="60" flex-xs="40" layout-gt-xs="row">
-                  <div class="mat-caption tc-grey-500" flex-gt-xs="50"> {{ user.created | date }} </div>
-                  <div class="mat-caption tc-grey-500" flex-gt-xs="50"> {{ user.lastAccess | timeAgo }} </div>
-              </span>
-              <span>
-                  <button mat-icon-button [mat-menu-trigger-for]="menu">
-                  <mat-icon>more_vert</mat-icon>
-                  </button>
-                  <mat-menu x-position="before" #menu="matMenu">
-                      <a [routerLink]="[user.id, 'edit']" mat-menu-item>
-                        <mat-icon>edit</mat-icon> Edit
-                      </a>
-                      <button mat-menu-item (click)="delete(user.id)">
-                        <mat-icon>delete</mat-icon> Delete
-                      </button>
-                  </mat-menu>
-              </span>
+              <h3 matLine> {{room.roomName}} </h3>
+              
             </mat-list-item>
             <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
-          </ng-template>
-          <ng-template let-room let-last="last" ngFor [ngForOf]="rooms">
-            <h3 matLine> {{room.roomName}} </h3>
           </ng-template>
         </mat-list>
       </ng-template>

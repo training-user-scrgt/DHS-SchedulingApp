@@ -8,6 +8,11 @@ import { TdMediaService } from '@covalent/core/media';
 
 import { UserService, IUser } from './services/user.service';
 import { Room } from '../../models/room.model';
+import { InventoryService } from '../../services/inventory.service';
+import { Observable } from 'rxjs/Observable';
+
+import {} from ''
+import { of } from 'rxjs';
 
 @Component({
   selector: 'qs-users',
@@ -26,12 +31,14 @@ export class UsersComponent implements OnInit {
               private _snackBarService: MatSnackBar,
               private _userService: UserService,
               private _changeDetectorRef: ChangeDetectorRef,
+              private _inventoryService: InventoryService,
               public media: TdMediaService) {
   }
 
   ngOnInit(): void {
     this._titleService.setTitle('Covalent Users');
     this.load();
+    this._inventoryService.getRooms().subscribe(rooms => this.rooms = rooms);
   }
 
   filterUsers(displayName: string = ''): void {
