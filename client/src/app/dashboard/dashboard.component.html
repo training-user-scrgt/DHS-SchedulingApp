@@ -1,0 +1,30 @@
+<td-layout-nav logo="assets:covalent" navigationRoute="/">
+  <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div td-toolbar-content layout="row" layout-align="center center" flex>
+    <span>Quickstart</span>
+    <span flex></span>
+  </div>
+  <div class="mat-content" layout-padding flex>
+    <div layout-gt-xs="row" layout-align-gt-xs="center start" class="margin">
+      <div flex-gt-xs="50">
+        <mat-card tdMediaToggle="gt-xs" [mediaClasses]="['push-top-lg']">
+          <mat-card-title>Welcome to the ODOS Reservation Portal:</mat-card-title>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <form #loginForm="ngForm">
+              <div layout="row">
+                <mat-card-actions layout="row">
+                  <button flex mat-raised-button color="accent" (click)="login('rooms')">Admin</button>
+                  <button flex mat-raised-button color="accent" (click)="login('rooms')">Requestor</button>
+                  <button flex mat-raised-button color="accent" (click)="login('rooms')">Reservation Manager</button>
+                </mat-card-actions>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>    
+  </div>
+</td-layout-nav>
