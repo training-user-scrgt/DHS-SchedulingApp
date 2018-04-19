@@ -9,6 +9,7 @@ import { TdMediaService } from '@covalent/core/media';
 import { Room } from '../../models/room.model';
 import { InventoryService } from '../../services/inventory.service';
 import { Observable } from 'rxjs/Observable';
+import { ITdDataTableColumn } from '@covalent/core/data-table';
 
 @Component({
   selector: 'app-rooms',
@@ -16,8 +17,13 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./rooms.component.scss']
 })
 export class RoomsComponent implements OnInit {
-
+  columns: ITdDataTableColumn[] = [
+    { name: 'building',  label: 'Building Name' },
+    { name: 'roomName', label: 'Room Name' },
+    { name: 'capacity', label: 'Occupancy' },
+  ];
   rooms: Room[];
+  available: boolean;
 
   constructor( private _inventoryService: InventoryService) { }
 

@@ -24,6 +24,7 @@ import { CovalentLayoutModule } from '@covalent/core/layout';
 import { CovalentDialogsModule } from '@covalent/core/dialogs';
 import { CovalentMediaModule } from '@covalent/core/media';
 import { CovalentLoadingModule } from '@covalent/core/loading';
+import { CovalentDataTableModule } from '@covalent/core/data-table'
 
 import { CovalentHttpModule, IHttpInterceptor } from '@covalent/http';
 
@@ -43,6 +44,7 @@ import { InventoryService } from '../services/inventory.service';
 import { RoomsComponent } from './rooms/rooms.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { ReportComponent } from './report/report.component';
+import { RoomFormComponent } from './rooms/roomForm/roomForm.component'
 
 const httpInterceptorProviders: Type<any>[] = [
   RequestInterceptor, 
@@ -61,6 +63,7 @@ export function getAPI(): string {
     RoomsComponent,
     ReservationsComponent,
     ReportComponent,
+    RoomFormComponent,
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     // angular modules
@@ -78,11 +81,13 @@ export function getAPI(): string {
     MatDividerModule,
     MatInputModule,
     MatToolbarModule,
+    MatSlideToggleModule,
     // covalent modules
     CovalentCommonModule,
     CovalentLayoutModule,
     CovalentMediaModule,
     CovalentLoadingModule,
+    CovalentDataTableModule,
     CovalentHttpModule.forRoot({
       interceptors: [{
         interceptor: RequestInterceptor, paths: ['**'],
