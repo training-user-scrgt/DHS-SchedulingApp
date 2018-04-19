@@ -1,7 +1,26 @@
 @wip
 Feature: Requestor persona (or role)
-  As a Requestor, I shall be presented if I attempted to book same conference rooms at the same time.
-  (Detect scheduling conflict.) The intent is to detect scheduling conflicts and prevent the same conference room from being double booked.
-  Unavailable rooms should not be offered/presented to Requestor for selection
 
-  
+  Scenario: Requestor successfully creates four succesful reservations
+    Given I login to the application as "requestor"
+    When I successfully create multiple reservations
+    Then my reservations are displayed on the landing page
+
+  Scenario: Requestor successfully modifies an existing reservation
+    Given I login to the application as "requestor"
+    And I successfully create a reservation
+    When I update the reservation
+    Then my updated reservation is displayed on the landing page
+
+  @negative
+  Scenario: Prevent double-booking by requestor
+    Given I login to the application as "requestor"
+    And I successfully create a reservation
+    When I attempt to double-book the room
+    Then an error message is displayed
+
+  @negative
+  Scenario: Prevent reservations longer than 3 hours
+    Given I login to the application as "requestor"
+    When I attempt to create a reservation of illegal duration
+    Then an error message is displayed

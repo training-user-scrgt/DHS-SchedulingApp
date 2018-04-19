@@ -1,7 +1,5 @@
 @wip
 Feature: Administrator persona (or role)
-  As an Administrator, I shall be able to Add/Modify/Delete users,
-  update conference rooms, and change the Audio/Visual equipment list
 
   Scenario: Add Users
     Given I login to the application as "administrator"
@@ -39,3 +37,20 @@ Feature: Administrator persona (or role)
     When I select a conference room
     And I mark its equipment as "available"
     Then the equipment availability for the room is updated in the A/V List
+
+  Scenario: Administrator successfully creates four succesful reservations
+    Given I login to the application as "administrator"
+    When I successfully create multiple reservations
+    Then my reservations are displayed on the landing page
+
+  Scenario: Administrator successfully modifies an existing reservation
+    Given I login to the application as "administrator"
+    And I successfully create a reservation
+    When I update the reservation
+    Then my updated reservation is displayed on the landing page
+
+  @negative
+  Scenario: Prevent reservations longer than 3 hours
+    Given I login to the application as "administrator"
+    When I attempt to create a reservation of illegal duration
+    Then an error message is displayed
