@@ -1,0 +1,22 @@
+Feature: Reporting functionality
+	As a Reservation Manager, I shall be able to access to a report for occupancy and vacancy rate of each conrefence room
+
+Scenario: View Occupancy/Vacancy Report
+	Given I logged in as a Reservation Manager
+		Then I click on reporting
+			And I select a time frame
+		Then system displays Occupancy and Vacancy Rate for all the Conference Rooms
+
+
+Scenario: View Occupancy/Vacancy Report by Buildings
+	Given I logged in as a Reservation Manager
+		Then I click on reporting
+			And I select a time frame
+			And I select a Building for which I need to see the report
+		Then system displays Occupancy and Vacancy Rate for all the Conference Rooms within that building
+		
+
+		
+		
+		
+		

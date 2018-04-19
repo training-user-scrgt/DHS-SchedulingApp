@@ -9,23 +9,29 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
+@SpringBootTest
 public class ReservationCreationTest {
 
     @Autowired
@@ -60,6 +66,7 @@ public class ReservationCreationTest {
         this.reservation.setReservationDate(LocalDate.now());
         this.reservation.setStartTime(LocalTime.of(12, 0));
         this.reservation.setEndTime(LocalTime.of(13, 0));
+        this.reservation.setRoomId(1);
     }
 
     @Test(expected = InvalidReservationException.class)
@@ -83,7 +90,6 @@ public class ReservationCreationTest {
         when(reservationConflictHelper
                 .isThereConflict(anyList(), any(Reservation.class))).thenReturn(true);
         reservationService.createNewReservation(this.reservation);
-
     }
 
     @Test(expected = InvalidReservationException.class)

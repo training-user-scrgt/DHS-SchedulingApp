@@ -11,6 +11,7 @@ import java.util.List;
 public interface ReservationRepository extends CrudRepository<Reservation, Integer> {
 
     List<Reservation> getAllByReservationDateOrderByStartTime(LocalDate date);
+    List<Reservation> getAllByReservationDateAndRoomIdOrderByStartTime(LocalDate date, int roomId);
 
     Reservation save(Reservation reservation);
 

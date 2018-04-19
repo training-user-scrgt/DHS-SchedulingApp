@@ -1,0 +1,4 @@
+Given as a Requestor, I am trying to view the panel screen
+	When anytime
+	Then the screen displays today’s schedule for that Conference Room
+		And the format is "MilitaryStartTime-MilitaryEndTime, Title of the room, Last Name of the Requestor"
