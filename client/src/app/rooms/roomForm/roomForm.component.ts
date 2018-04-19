@@ -46,5 +46,3 @@ export class RoomFormComponent implements OnInit {
   save(){
     } 
   }
-
-}
