@@ -1,0 +1,29 @@
+node {
+    stage('Checkout') {
+        // Checkout from Github (Optional if source is available)
+    }
+
+    stage('Test') {
+        // Run unit tests
+    }
+    
+    stage('Build') {
+        // Run build command to produce artifact
+    }
+    
+    stage('Validate') {
+        // Run code analysis: Code Quality, Vulnerability Analysis
+    }
+    
+    stage('Package') {
+        // Containerize the service
+    }
+    
+    stage('Publish') {
+        // Publish to a container registry
+    }
+    
+    stage('Deploy') {
+        // Trigger the deploy pipeline for this service (service:tag)
+    }
+}
