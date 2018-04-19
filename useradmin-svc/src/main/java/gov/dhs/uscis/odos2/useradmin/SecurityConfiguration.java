@@ -2,6 +2,7 @@ package gov.dhs.uscis.odos2.useradmin;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,7 +12,8 @@ import static org.springframework.security.extensions.saml2.config.SAMLConfigure
 
 @EnableWebSecurity
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@Order(2)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
@@ -35,7 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/saml*").permitAll()
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
+                .antMatchers("/auth*").authenticated()
                 .and()
                 .apply(saml())
                 .serviceProvider()
