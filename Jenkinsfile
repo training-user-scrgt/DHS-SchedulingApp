@@ -1,28 +1,14 @@
 pipeline {
     agent any
 
-    stage {
-        stage('Stage') {
-             stage('Build') {
-                    steps {
-                        echo 'Building..'
-                        
-                    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                withMaven(maven : "name") {
+                  sh 'mvn clean compile'
+                  }
             }
-        
-            stage('OWASP Scan') {
-                    steps {
-                        echo 'Building..'
-                        
-                    }
-            }
-            stage('Code Scan') {
-                    steps {
-                        echo 'Building..'
-                        
-                    }
-            }
-        
         }
         stage('Test') {
             steps {
