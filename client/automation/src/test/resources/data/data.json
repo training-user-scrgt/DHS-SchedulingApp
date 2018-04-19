@@ -1,0 +1,25 @@
+{
+	"Login as Requester": 
+	{
+		"reservation": 
+		{
+			"_comment": "this data object is not yet used"
+		}
+	},
+
+	"Login as Reservation Manager": 
+	{
+		"reservation": 
+		{
+			"_comment": "this data object is not yet used"
+		}
+	},
+
+	"Login as Administrator": 
+	{
+		"reservation": 
+		{
+			"_comment": "this data object is not yet used"
+		}
+	}
+}
