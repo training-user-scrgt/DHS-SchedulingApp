@@ -12,7 +12,7 @@ import cucumber.api.CucumberOptions;
 		tags = {"~@wip"},
 		features = {
 		"src/test/resources/features/"},
-		glue={"com.karsun.kic.tan", "org.openqa", "gov.uscis.odos2"})
+		glue={"com.karsun.kic.tan", "org.openqa", "gov.dhs.uscis.odos2"})
 @TestDataFiles(files = { "src/test/resources/data/data.json" })
 public class Runner {
 }

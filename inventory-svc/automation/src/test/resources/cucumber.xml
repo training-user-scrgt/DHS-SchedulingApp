@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<context:annotation-config/>
-	<context:component-scan base-package="gov.uscis.odos2" />
+	<context:component-scan base-package="gov.dhs.uscis.odos2" />
 
     <context:property-placeholder location="classpath:driver.properties" />
 
