@@ -11,9 +11,9 @@ public interface UserAdminService {
 
     List<Users> findAllUsers();
 
-    Users createNewUser(Users user) throws UserAlreadyExistsException;
+    Users createNewUser(Users user) throws UserAlreadyExistsException, InvalidUserException;
 
-    Users modifyExistingUser(Users user) throws InvalidUserException;
+    Users modifyExistingUser(UUID id, Users user) throws InvalidUserException;
     
     void deleteUser(UUID userID) throws InvalidUserException;
 }

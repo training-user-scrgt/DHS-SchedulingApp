@@ -18,12 +18,16 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.Collections;
 
 @Service
 public class UserAdminServiceImpl implements UserAdminService {
     @Autowired
     private UsersRepository usersRepository;
-    private UserRolesRepository UserRolesRepository;
+    @Autowired
+    private RolesRepository rolesRepository;
+    @Autowired
+    private UserRolesRepository userRolesRepository;
 
     @Override
     public Users findByUsername(String username) {
@@ -36,33 +40,50 @@ public class UserAdminServiceImpl implements UserAdminService {
     }
 
     @Override
-    public Users createNewUser(Users user) throws UserAlreadyExistsException {
+    public Users createNewUser(Users user) throws UserAlreadyExistsException, InvalidUserException {
+
+        if (null == user.getUserName() || null == user.getFirstName() || null == user.getLastName()) {
+            throw new InvalidUserException("Invalid input");
+        }
 
         if ( usersRepository.findByUsername(user.getUserName()) != null ) {
             throw new UserAlreadyExistsException("User already exists");
         }
+
         //make sure UUID is random
-        //UUID userID = UUID.randomUUID();
-        //user.setId(userID);
+        UUID userID = UUID.randomUUID();
+        user.setId(userID);
         user.setCreatedDate(LocalDateTime.now());
+        //random till pulled from token
+        user.setCreatedBy(UUID.randomUUID());
+        user.setUpdatedBy(UUID.randomUUID());
         user.setUpdatedDate(LocalDateTime.now());
+
+        //default role if none exists
+        if (null == user.getRoles()) {
+            Roles role = rolesRepository.findByRole("ROLE_REQUESTOR");
+            List<Roles> roles = Collections.singletonList(role);
+            user.setRoles(roles);
+        }
+
         return saveUserandRolesFromUser(user);
     }
 
     @Override
-    public Users modifyExistingUser(Users user) throws InvalidUserException {
+    public Users modifyExistingUser(UUID id, Users user) throws InvalidUserException {
 
-        Users existingUser = usersRepository.findByUsername(user.getUserName());
+        Users existingUser = usersRepository.findUsersById(id);
 
         if ( existingUser == null ) {
             throw new InvalidUserException("User does not exist");
         }
-        user.setUpdatedDate(LocalDateTime.now());
-        user.setCreatedBy(existingUser.getCreatedBy());
-        user.setCreatedDate(existingUser.getCreatedDate());
         
-        usersRepository.delete(existingUser);
-        return saveUserandRolesFromUser(user);
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        //user.setUpdatedBy(method to pull user from saml)
+        existingUser.setUpdatedDate(LocalDateTime.now());
+        
+        return saveUserandRolesFromUser(existingUser);
     }
 
     @Override
@@ -92,7 +113,7 @@ public class UserAdminServiceImpl implements UserAdminService {
             UserRoles userRoles = new UserRoles();
             userRoles.setRoleId(roles.getId());
             userRoles.setUserId(user.getId());
-            UserRolesRepository.save(userRoles); 
+            userRolesRepository.save(userRoles); 
         }
 
         return user;
@@ -100,9 +121,9 @@ public class UserAdminServiceImpl implements UserAdminService {
 
     private void deleteUserandRolesFromUser(Users user) {
 
-        for (UserRoles userRoles : UserRolesRepository.findAll()) {
+        for (UserRoles userRoles : userRolesRepository.findAll()) {
             if (userRoles.getUserId() ==  user.getId()) {
-                UserRolesRepository.delete(userRoles);
+                userRolesRepository.delete(userRoles);
             }
         }        
         usersRepository.delete(user);

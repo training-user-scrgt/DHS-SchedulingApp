@@ -19,11 +19,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: token
-                  type: varchar(200)
-                  constraints:
-                    nullable: false
-              - column:
                   name: first_name
                   type: varchar(200)
                   constraints:
@@ -154,10 +149,10 @@ databaseChangeLog:
                   value: "0"
               - column:
                   name: role
-                  value: "User"
+                  value: "ROLE_REQUESTOR"
               - column:
                   name: description
-                  value: "A User of the system"
+                  value: "A Requestor of the system"
         - insert:
             tableName: roles
             columns:
@@ -166,7 +161,7 @@ databaseChangeLog:
                   value: "1"
               - column:
                   name: role
-                  value: "Administrator"
+                  value: "ROLE_ADMIN"
               - column:
                   name: description
                   value: "An Administrator of the system"
@@ -178,7 +173,7 @@ databaseChangeLog:
                   value: "2"
               - column:
                   name: role
-                  value: "Report Manager"
+                  value: "ROLE_MANAGER"
               - column:
                   name: description
                   value: "A Report Manager of the system"
