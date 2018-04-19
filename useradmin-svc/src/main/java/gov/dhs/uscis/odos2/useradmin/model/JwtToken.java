@@ -34,6 +34,15 @@ public class JwtToken implements Authentication {
         return this.jwt;
     }
 
+    public String getUserUiid() {
+
+        if (jwt != null && jwt.getClaim("uuid") != null) {
+            return jwt.getClaim("uuid").asString();
+        } else {
+            return "";
+        }
+    }
+
     @Override
     public String getName() {
         return this.claims.get("subject") != null ? this.claims.get("subject").asString() : "";
