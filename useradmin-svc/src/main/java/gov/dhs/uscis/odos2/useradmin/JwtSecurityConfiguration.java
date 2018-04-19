@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.AnonymousAuthenticationFi
 
 @EnableWebSecurity
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Order(1)
 public class JwtSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -37,7 +37,7 @@ public class JwtSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(
                 SessionCreationPolicy.STATELESS);
         http.addFilterAfter(new JwtFilter(secret, issuer, authenticationManagerBean()),
-                AnonymousAuthenticationFilter.class).antMatcher("/useradmin/**");
+                AnonymousAuthenticationFilter.class).antMatcher("/user/**");
 
     }
 

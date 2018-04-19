@@ -12,7 +12,7 @@ import static org.springframework.security.extensions.saml2.config.SAMLConfigure
 
 @EnableWebSecurity
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Order(2)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
