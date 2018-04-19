@@ -22,11 +22,11 @@ import { CovalentDialogsModule } from '@covalent/core/dialogs';
 import { CovalentMediaModule } from '@covalent/core/media';
 import { CovalentLoadingModule } from '@covalent/core/loading';
 
-import { RoomsComponent } from './rooms.component';
+import { ReservationsComponent } from './reservations.component';
 
 @NgModule({
   declarations: [
-    RoomsComponent,
+    ReservationsComponent,
   ], // directives, components, and pipes owned by this NgModule
   imports: [
     // angular modules
