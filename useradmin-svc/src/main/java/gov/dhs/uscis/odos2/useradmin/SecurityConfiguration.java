@@ -17,20 +17,20 @@ import static org.springframework.security.extensions.saml2.config.SAMLConfigure
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
-    @Value("${security.saml2.metadata-url}")
-    String metadataUrl;
-
-    @Value("${server.ssl.key-alias}")
-    String keyAlias;
-
-    @Value("${server.ssl.key-store-password}")
-    String password;
-
-    @Value("${server.port}")
-    String port;
-
-    @Value("${server.ssl.key-store}")
-    String keyStoreFilePath;
+//    @Value("${security.saml2.metadata-url}")
+//    String metadataUrl;
+//
+//    @Value("${server.ssl.key-alias}")
+//    String keyAlias;
+//
+//    @Value("${server.ssl.key-store-password}")
+//    String password;
+//
+//    @Value("${server.port}")
+//    String port;
+//
+//    @Value("${server.ssl.key-store}")
+//    String keyStoreFilePath;
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
