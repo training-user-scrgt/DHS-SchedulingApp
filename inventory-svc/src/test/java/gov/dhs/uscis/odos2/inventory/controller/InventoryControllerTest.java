@@ -54,6 +54,9 @@ public class InventoryControllerTest {
     
     private final String ROOM_BODY = "{\n" +
             "\t\"roomId\": 1,\n" +
+            "\t\"building\" : {\n" + 
+            "\t\"buildingId\" : 1\n" + 
+            "\t},\n" +         
             "\t\"available\": false,\n" +
             "\t\"createDate\": \"2018-04-17T15:09:31.829\",\n" +
             "\t\"createBy\": 1,\n" +
@@ -170,8 +173,8 @@ public class InventoryControllerTest {
         roomEquipment.setRoom(room);
         
         Equipment equipment = new Equipment();
-        equipment.setEquipmentId(3);
-        equipment.setEquipmentName("Charger");
+        equipment.setEquipmentId(1);
+        equipment.setEquipmentName("Projector");
         roomEquipment.setEquipment(equipment);
         roomEquipment.setCreateDate(LocalDateTime.now());
         roomEquipment.setUpdateDate(null);
@@ -191,15 +194,15 @@ public class InventoryControllerTest {
     public void shouldUpdateRoom() throws Exception {
 
         Room room = new Room();
-        room.setRoomId(1);;
-        room.setAvailable(true);
+        room.setRoomId(1);
+        room.setAvailable(false);
         
         when(roomService.updateRoomStatus(any(Room.class))).thenReturn(room);
 
         mvc.perform(post("/room/1")
         		.content(ROOM_BODY)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
     }
     

@@ -5,6 +5,7 @@ import gov.dhs.uscis.odos2.inventory.model.Building;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -18,9 +19,9 @@ public class RoomDTO {
     private boolean available;
     private Integer capacity;
     private LocalDateTime createDate;
-    private Integer createBy;
+    private UUID createBy;
     private LocalDateTime updateDate;
-    private Integer updateId;
+    private UUID updateId;
     
 
     /**
@@ -94,15 +95,7 @@ public class RoomDTO {
 
 	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
-	}
-
-	public Integer getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(Integer createBy) {
-		this.createBy = createBy;
-	}
+	}	
 
 	public LocalDateTime getUpdateDate() {
 		return updateDate;
@@ -112,13 +105,19 @@ public class RoomDTO {
 		this.updateDate = updateDate;
 	}
 
-	public Integer getUpdateId() {
+	public UUID getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(UUID createBy) {
+		this.createBy = createBy;
+	}
+
+	public UUID getUpdateId() {
 		return updateId;
 	}
 
-	public void setUpdateId(Integer updateId) {
+	public void setUpdateId(UUID updateId) {
 		this.updateId = updateId;
-	}
-
-    
+	}    
 }

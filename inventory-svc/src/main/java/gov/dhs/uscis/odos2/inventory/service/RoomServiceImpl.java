@@ -2,6 +2,7 @@ package gov.dhs.uscis.odos2.inventory.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +68,7 @@ public class RoomServiceImpl implements RoomService{
     	
    
     	roomEquipment.setCreateDate(LocalDateTime.now());
-    	roomEquipment.setCreateBy(1);
+    	roomEquipment.setCreateBy(roomEquipment.getCreateBy());
     	
     	roomEquipment = roomEquipmentRepository.save(roomEquipment);
         return roomEquipment;
@@ -107,7 +108,7 @@ public class RoomServiceImpl implements RoomService{
     	
        // validateReservationValues(room);        
 
-        room.setUpdateId(1);
+        room.setUpdateId(room.getUpdateId());
         room.setUpdateDate(LocalDateTime.now());
 
         return roomRepository.save(room);

@@ -75,7 +75,7 @@ public class RoomServiceTest {
     	List<Room> roomList = new ArrayList<Room>();
     	roomList.add(this.room);
     	
-        when(roomRepository.findAll()).thenReturn(roomList);
+        when(roomRepository.findRoomByAvailable(true)).thenReturn(roomList);
 
     	List<Room> roomListResult = roomService.getAllRooms();
         assertThat(roomListResult).isNotNull();
