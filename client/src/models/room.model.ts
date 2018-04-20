@@ -2,7 +2,7 @@ import { Building } from "./building.model";
 
 export class Room {
     // Note: Using only optional constructor properties without backing store disables typescript's type checking for the type
-    constructor(roomId?: number, RoomName?: string, available?: boolean, capacity?: number, building?: Building, roomNumber: number) {
+    constructor(roomId?: number, RoomName?: string, available?: boolean, capacity?: number, building?: Building, roomNumber?: number) {
 
         this.roomId = roomId;
         this.RoomName = RoomName;
