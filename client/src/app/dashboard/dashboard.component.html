@@ -1,14 +1,33 @@
-<div style="text-align:center" class="alert alert-secondary">
-  <h1>Insert Dashboard here!</h1>
-
-  <!-- <button type="button" class="btn btn-info">
-    Home
-    <i class="fa fa-home"></i>
+<td-layout-nav navigationRoute="/">
+  <!-- <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
   </button> -->
-
-  <a routerLink="/panel">
-    <button type="button" class="btn btn-info">
-        Panel <i class="fa fa-calendar"></i>
-      </button>
-  </a>
-</div>
+  <div td-toolbar-content layout="row" layout-align="center center" flex>
+      <span>
+          <img src="assets/icons/png/DHS_icon_small.png" width="18">
+        ODDS Reservation App
+      </span>
+    <span flex></span>
+  </div>
+  <div class="mat-content" layout-padding flex>
+    <div layout-gt-xs="row" layout-align-gt-xs="center start" class="margin">
+      <div flex-gt-xs="50">
+        <mat-card tdMediaToggle="gt-xs" [mediaClasses]="['push-top-lg']">
+          <mat-card-title><span id="welcomeId">Welcome to the ODDS Reservation App!</span></mat-card-title>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <form #loginForm="ngForm">
+              <div layout="row">
+                <mat-card-actions layout="row">
+                  <button flex mat-raised-button color="accent" (click)="login('rooms')">Admin</button>
+                  <button flex mat-raised-button color="accent" (click)="login('rooms')">Requestor</button>
+                  <button flex mat-raised-button color="accent" (click)="login('rooms')">Reservation Manager</button>
+                </mat-card-actions>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>    
+  </div>
+</td-layout-nav>

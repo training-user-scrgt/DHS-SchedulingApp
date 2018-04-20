@@ -1,56 +1,110 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgModule, Type } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule, Title }  from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AlertModule } from 'ngx-bootstrap';
-// import { NgbModule } from 'ngx-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, Headers, RequestOptions } from '@angular/http';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { CovalentCommonModule } from '@covalent/core/common';
+import { CovalentSearchModule } from '@covalent/core/search';
 import { CovalentLayoutModule } from '@covalent/core/layout';
-import { CovalentStepsModule  } from '@covalent/core/steps';
-/* any other core modules */
-// (optional) Additional Covalent Modules imports
-import { CovalentHttpModule } from '@covalent/http';
-import { CovalentHighlightModule } from '@covalent/highlight';
-import { CovalentMarkdownModule } from '@covalent/markdown';
-import { CovalentDynamicFormsModule } from '@covalent/dynamic-forms';
+import { CovalentDialogsModule } from '@covalent/core/dialogs';
+import { CovalentMediaModule } from '@covalent/core/media';
+import { CovalentLoadingModule } from '@covalent/core/loading';
+import { CovalentDataTableModule } from '@covalent/core/data-table'
+
+import { CovalentHttpModule, IHttpInterceptor } from '@covalent/http';
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+import { appRoutes } from './app.routes';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './partials/header/header.component';
-import { FooterComponent } from './partials/footer/footer.component';
+import { RequestInterceptor } from '../config/interceptors/request.interceptor';
+import { MOCK_API } from '../config/api.config';
+
+import { USER_PROVIDER, USERS_API } from './users';
+import { MainComponent } from './main.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PanelComponent } from './panel/panel.component';
+import { InventoryService } from '../services/inventory.service';
+import { RoomsComponent } from './rooms/rooms.component';
+import { ReservationsComponent } from './reservations/reservations.component';
+import { ReportComponent } from './report/report.component';
+import { RoomFormComponent } from './rooms/roomForm/roomForm.component'
 
-import 'hammerjs';
+const httpInterceptorProviders: Type<any>[] = [
+  RequestInterceptor, 
+];
+
+export function getAPI(): string {
+  return MOCK_API;
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
+    MainComponent,
     LoginComponent,
     DashboardComponent,
-    PanelComponent
-  ],
+    RoomsComponent,
+    ReservationsComponent,
+    ReportComponent,
+    RoomFormComponent,
+  ], // directives, components, and pipes owned by this NgModule
   imports: [
+    // angular modules
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
-    AlertModule.forRoot(),
     FormsModule,
+    HttpClientModule,
     HttpModule,
+    // material modules
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatListModule,
+    MatDividerModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatSlideToggleModule,
+    // covalent modules
+    CovalentCommonModule,
     CovalentLayoutModule,
-    CovalentStepsModule,
-    // (optional) Additional Covalent Modules imports
-    CovalentHttpModule.forRoot(),
-    CovalentHighlightModule,
-    CovalentMarkdownModule,
-    CovalentDynamicFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    CovalentMediaModule,
+    CovalentLoadingModule,
+    CovalentDataTableModule,
+    CovalentHttpModule.forRoot({
+      interceptors: [{
+        interceptor: RequestInterceptor, paths: ['**'],
+      }],
+    }),
+    // external modules
+    NgxChartsModule,
+    // routes
+    appRoutes,
+  ], // modules needed to run this module
+  providers: [
+    httpInterceptorProviders,
+    Title, {
+      provide: USERS_API, useFactory: getAPI,
+    }, USER_PROVIDER,InventoryService,
+  ], // additional providers needed for this module
+  entryComponents: [ ],
+  bootstrap: [ AppComponent ],
 })
-export class AppModule { }
+export class AppModule {}

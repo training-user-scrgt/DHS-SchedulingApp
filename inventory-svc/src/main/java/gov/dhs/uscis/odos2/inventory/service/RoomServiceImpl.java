@@ -42,8 +42,8 @@ public class RoomServiceImpl implements RoomService{
 
     @Transactional(readOnly = true)
     public List<Room> getAllRooms() {
-        return roomRepository.findRoomByAvailable(true);
-    	//return roomRepository.findAll();
+        //return roomRepository.findRoomByAvailable(true);
+    	return roomRepository.findAll();
     }
     
     /**
