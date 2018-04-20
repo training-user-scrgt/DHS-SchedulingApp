@@ -1,102 +1,102 @@
-package gov.dhs.uscis.odos2.useradmin.model;
+// package gov.dhs.uscis.odos2.useradmin.model;
 
 
-import com.auth0.jwt.interfaces.Claim;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import com.auth0.jwt.interfaces.Claim;
+// import com.auth0.jwt.interfaces.DecodedJWT;
+// import org.apache.commons.lang3.StringUtils;
+// import org.springframework.security.core.Authentication;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.*;
+// import java.util.*;
 
 
-@SuppressWarnings("serial")
-public class JwtToken implements Authentication {
+// @SuppressWarnings("serial")
+// public class JwtToken implements Authentication {
 
-    private final DecodedJWT jwt;
-    private Map<String, Claim> claims;
-    private boolean authenticated;
+//     private final DecodedJWT jwt;
+//     private Map<String, Claim> claims;
+//     private boolean authenticated;
 
-    public JwtToken(DecodedJWT jwt) {
-        this.jwt = jwt;
-        this.authenticated = true;
+//     public JwtToken(DecodedJWT jwt) {
+//         this.jwt = jwt;
+//         this.authenticated = true;
 
-        this.claims = (this.jwt.getClaims() == null) ? new HashMap<>(0) : this.jwt.getClaims();
+//         this.claims = (this.jwt.getClaims() == null) ? new HashMap<>(0) : this.jwt.getClaims();
 
-    }
+//     }
 
-    public void clearClaims() {
-        this.claims = new HashMap<>();
-    }
+//     public void clearClaims() {
+//         this.claims = new HashMap<>();
+//     }
 
-    public DecodedJWT getJwt() {
-        return this.jwt;
-    }
+//     public DecodedJWT getJwt() {
+//         return this.jwt;
+//     }
 
-    public String getUserUiid() {
+//     public String getUserUiid() {
 
-        if (jwt != null && jwt.getClaim("uuid") != null) {
-            return jwt.getClaim("uuid").asString();
-        } else {
-            return "";
-        }
-    }
+//         if (jwt != null && jwt.getClaim("uuid") != null) {
+//             return jwt.getClaim("uuid").asString();
+//         } else {
+//             return "";
+//         }
+//     }
 
-    @Override
-    public String getName() {
-        return this.claims.get("subject") != null ? this.claims.get("subject").asString() : "";
-    }
+//     @Override
+//     public String getName() {
+//         return this.claims.get("subject") != null ? this.claims.get("subject").asString() : "";
+//     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        String claimsString = this.claims.get("roles").asString();
+//     @Override
+//     public Collection<? extends GrantedAuthority> getAuthorities() {
+//         String claimsString = this.claims.get("roles").asString();
 
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+//         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        if (StringUtils.isNotEmpty(claimsString)) {
+//         if (StringUtils.isNotEmpty(claimsString)) {
 
-            String[] roles = claimsString.split(",");
+//             String[] roles = claimsString.split(",");
 
-            for (String role : roles) {
-                grantedAuthorities.add(new SimpleGrantedAuthority(role));
-            }
-        }
+//             for (String role : roles) {
+//                 grantedAuthorities.add(new SimpleGrantedAuthority(role));
+//             }
+//         }
 
-        return Collections.unmodifiableList(grantedAuthorities);
-    }
+//         return Collections.unmodifiableList(grantedAuthorities);
+//     }
 
-    @Override
-    public Object getCredentials() {
-        return "";
-    }
+//     @Override
+//     public Object getCredentials() {
+//         return "";
+//     }
 
-    @Override
-    public Object getDetails() {
-        return claims.toString();
-    }
+//     @Override
+//     public Object getDetails() {
+//         return claims.toString();
+//     }
 
-    @Override
-    public Object getPrincipal() {
-        return claims.get("subject");
-    }
+//     @Override
+//     public Object getPrincipal() {
+//         return claims.get("subject");
+//     }
 
-    @Override
-    public boolean isAuthenticated() {
-        return authenticated;
-    }
+//     @Override
+//     public boolean isAuthenticated() {
+//         return authenticated;
+//     }
 
-    @Override
-    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-        this.authenticated = isAuthenticated;
-    }
+//     @Override
+//     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+//         this.authenticated = isAuthenticated;
+//     }
 
-    @Override
-    public String toString() {
-        return "JwtToken{" +
-                "jwt=" + jwt +
-                ", claims=" + claims +
-                ", authenticated=" + authenticated +
-                '}';
-    }
-}
+//     @Override
+//     public String toString() {
+//         return "JwtToken{" +
+//                 "jwt=" + jwt +
+//                 ", claims=" + claims +
+//                 ", authenticated=" + authenticated +
+//                 '}';
+//     }
+// }
