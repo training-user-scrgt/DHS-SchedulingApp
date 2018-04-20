@@ -34,26 +34,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/saml*").permitAll()
-//                .anyRequest().authenticated()
-                .antMatchers("/auth*").authenticated()
-                .and()
-                .apply(saml())
-                .serviceProvider()
-                .keyStore()
-                .storeFilePath(this.keyStoreFilePath)
-                .password(this.password)
-                .keyname(this.keyAlias)
-                .keyPassword(this.password)
-                .and()
-                .protocol("https")
-                .hostname(String.format("%s:%s", "localhost", this.port))
-                .basePath("/")
-                .and()
-                .identityProvider()
-                .metadataFilePath(this.metadataUrl);
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/saml*").permitAll()
+//                .antMatchers("/auth*").authenticated()
+//                .and()
+//                .apply(saml())
+//                .serviceProvider()
+//                .keyStore()
+//                .storeFilePath(this.keyStoreFilePath)
+//                .password(this.password)
+//                .keyname(this.keyAlias)
+//                .keyPassword(this.password)
+//                .and()
+//                .protocol("https")
+//                .hostname(String.format("%s:%s", "localhost", this.port))
+//                .basePath("/")
+//                .and()
+//                .identityProvider()
+//                .metadataFilePath(this.metadataUrl);
     }
 
 }

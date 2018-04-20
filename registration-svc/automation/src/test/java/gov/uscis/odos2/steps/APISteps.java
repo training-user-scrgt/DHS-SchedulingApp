@@ -143,7 +143,7 @@ public class APISteps extends Steps {
 			tries++;
 		}
 		
-		if (tries > maxTries) {
+		if (tries >= maxTries) {
 			throw new RuntimeException("Unable to find week date without reservations in database");
 		}
 		
