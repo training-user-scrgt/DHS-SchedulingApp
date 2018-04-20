@@ -11,7 +11,6 @@ import gov.dhs.uscis.odos2.useradmin.repository.UserRolesRepository;
 import gov.dhs.uscis.odos2.useradmin.repository.UsersRepository;
 import gov.dhs.uscis.odos2.useradmin.service.UserAdminService;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +25,6 @@ public class UserAdminServiceImpl implements UserAdminService {
     private UsersRepository usersRepository;
     @Autowired
     private RolesRepository rolesRepository;
-    @Autowired
-    private UserRolesRepository userRolesRepository;
 
     @Override
     public Users findByUsername(String username) {
@@ -50,23 +47,20 @@ public class UserAdminServiceImpl implements UserAdminService {
             throw new UserAlreadyExistsException("User already exists");
         }
 
-        //make sure UUID is random
         UUID userID = UUID.randomUUID();
         user.setId(userID);
         user.setCreatedDate(LocalDateTime.now());
-        //random till pulled from token
-        user.setCreatedBy(UUID.randomUUID());
-        user.setUpdatedBy(UUID.randomUUID());
+        user.setCreatedBy(userID);
+        user.setUpdatedBy(userID);
         user.setUpdatedDate(LocalDateTime.now());
 
-        //default role if none exists
         if (null == user.getRoles()) {
             Roles role = rolesRepository.findByRole("ROLE_REQUESTOR");
             List<Roles> roles = Collections.singletonList(role);
             user.setRoles(roles);
         }
 
-        return saveUserandRolesFromUser(user);
+        return usersRepository.save(user);
     }
 
     @Override
@@ -77,55 +71,22 @@ public class UserAdminServiceImpl implements UserAdminService {
         if ( existingUser == null ) {
             throw new InvalidUserException("User does not exist");
         }
-        
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
-        //user.setUpdatedBy(method to pull user from saml)
         existingUser.setUpdatedDate(LocalDateTime.now());
         
-        return saveUserandRolesFromUser(existingUser);
+        return usersRepository.save(existingUser);
     }
 
     @Override
     public void deleteUser(UUID userID) throws InvalidUserException {
-        Users userToDelete = findUserByID(userID);
-        if ( usersRepository.findByUsername(userToDelete.getUserName()) == null ) {
+        System.out.println(userID);
+        Users userToDelete = usersRepository.findUsersById(userID);
+        System.out.println("success");
+        String mystring = userToDelete.getUserName();
+        if (usersRepository.findByUsername(mystring) == null ) {
             throw new InvalidUserException("User does not exist");
         }
-        deleteUserandRolesFromUser(userToDelete);
-    }
-
-    private Users findUserByID(UUID userID) {
-        String username = "";
-        for (Users users : this.findAllUsers()) {
-            if (userID == users.getId()) {
-                username = users.getUserName();
-            }
-        }
-        return this.findByUsername(username);
-    }
-
-    private Users saveUserandRolesFromUser(Users user) {
-
-        usersRepository.save(user);
-
-        for (Roles roles : user.getRoles()) {
-            UserRoles userRoles = new UserRoles();
-            userRoles.setRoleId(roles.getId());
-            userRoles.setUserId(user.getId());
-            userRolesRepository.save(userRoles); 
-        }
-
-        return user;
-    }
-
-    private void deleteUserandRolesFromUser(Users user) {
-
-        for (UserRoles userRoles : userRolesRepository.findAll()) {
-            if (userRoles.getUserId() ==  user.getId()) {
-                userRolesRepository.delete(userRoles);
-            }
-        }        
-        usersRepository.delete(user);
+        usersRepository.delete(userToDelete);
     }
 }
