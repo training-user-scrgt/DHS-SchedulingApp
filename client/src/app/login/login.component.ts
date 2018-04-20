@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { TdLoadingService } from '@covalent/core/loading';
 
 @Component({
-  selector: 'app-login',
+  selector: 'qs-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor() { }
+  username: string;
+  password: string;
 
-  ngOnInit() {
+  constructor(private _router: Router,
+              private _loadingService: TdLoadingService) {}
+
+  login(): void {
+    this._loadingService.register();
+    alert('Mock log in as ' + this.username);
+    setTimeout(() => {
+      this._router.navigate(['/']);
+      this._loadingService.resolve();
+    }, 2000);
   }
-
 }

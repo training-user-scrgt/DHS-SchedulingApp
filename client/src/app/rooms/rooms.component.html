@@ -1,0 +1,72 @@
+<td-layout-nav navigationRoute="/">
+ <!-- <button mat-icon-button td-menu-button tdLayoutToggle>
+    <mat-icon>menu</mat-icon>
+  </button> -->
+  <div td-toolbar-content layout="row" layout-align="center center" flex>
+      <span>
+          <img src="assets/icons/png/DHS_icon_small.png" width="18">
+        ODOS Reservation App
+      </span>
+    <span flex></span>
+  </div>
+  <td-layout-manage-list>
+    <mat-nav-list td-sidenav-content >
+        <a mat-list-item [routerLink]="['/users']">
+          Manage User Accounts
+        </a>
+        <a mat-list-item [routerLink]="['/rooms']">
+          Manage Conference Rooms
+        </a>
+        <a mat-list-item [routerLink]="['/reservations']">
+          Make a Reservation
+        </a>
+        <a mat-list-item [routerLink]="['/report']">
+          Reporting
+        </a>
+    </mat-nav-list>
+    <div>
+      <p style="padding-left: 20px; font-size: 20px;">Manage Conference Rooms</p>
+      <p style="padding-left: 20px; ">Make meeting spaces unavailable for booking and edit each room's A/V equipment inventory.</p>
+    </div>
+    <mat-card class="push-bottom-xxl" tdMediaToggle="gt-xs" [mediaClasses]="['push']">
+      <mat-divider></mat-divider>
+      <ng-template tdLoading="rooms.list">
+        <mat-list class="will-load">
+          <div class="pad" *ngIf="rooms?.length === 0" layout="row" layout-align="center center">
+            <h3>No rooms to display.</h3>
+          </div>
+          
+          <table td-data-table >
+              <thead>
+                <tr td-data-table-column-row>
+                  <th td-data-table-column
+                      *ngFor="let column of columns">
+                    {{column.label}}
+                  </th>
+                  <th td-data-table-column>
+                    <span>Status</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr td-data-table-row *ngFor="let row of rooms">
+                  <td td-data-table-cell *ngFor="let column of columns">
+                    {{row[column.name].buildingName ? row[column.name].buildingName : row[column.name]}}
+                    
+                  </td>
+                  <td td-data-table-cell>
+                      <div layout="row">
+                          {{row.available ? "Available" : "Unavailable"}}
+                          <a color="accent" [routerLink]="[row.roomId, 'edit']" style="padding-left: 15px;">
+                              Edit
+                            </a>
+                        </div> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </mat-list>
+      </ng-template>
+    </mat-card>
+  </td-layout-manage-list>   
+</td-layout-nav>
