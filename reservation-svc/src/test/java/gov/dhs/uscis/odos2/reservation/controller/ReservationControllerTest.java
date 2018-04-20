@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class ReservationControllerTest {
             "}";
 
 
-    @Test @Ignore
+    @Test
     public void shouldCreateReservation() throws Exception {
 
         Reservation reservation = new Reservation();
@@ -82,19 +83,44 @@ public class ReservationControllerTest {
 
     }
 
-    @Test @Ignore
+    @Test
     public void shouldGetReservationsByDate() throws Exception {
 
         Reservation reservation = new Reservation();
         reservation.setId(1);
         reservation.setReservationDate(LocalDate.of(2018, 4, 20));
 
-        List<Reservation> reservationList = new ArrayList<Reservation>(1);
+        List<Reservation> reservationList = new ArrayList<>(1);
         reservationList.add(reservation);
 
         when(reservationService.getReservationsByDate(any(LocalDate.class))).thenReturn(reservationList);
 
         mvc.perform(get("/reservation/2018-04-20")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void shouldGetReservationsByDateAndTime() throws Exception {
+
+        Reservation reservation = new Reservation();
+        reservation.setId(1);
+        reservation.setReservationDate(LocalDate.of(2018, 4, 20));
+        reservation.setStartTime(LocalTime.of(11, 00));
+        reservation.setEndTime(LocalTime.of(13, 00));
+
+        List<Reservation> reservationList = new ArrayList<>(1);
+        reservationList.add(reservation);
+
+        when(reservationService
+                .getReservationsByDateAndTime(
+                        any(LocalDate.class),
+                        any(LocalTime.class),
+                        any(LocalTime.class)))
+                .thenReturn(reservationList);
+
+        mvc.perform(get("/reservation/search?date=2018-04-20&from=12:00&to=15:00")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
