@@ -45,6 +45,9 @@ public final class Room extends AbstractEntity {
     
 	@Column(name = "available", nullable = false)
     private boolean available;
+	
+    @Column(name = "room_number", nullable = false)
+    private String roomNumber;
     
 	@Column(name = "create_date", nullable = false)
     private LocalDateTime createDate;
@@ -136,4 +139,12 @@ public final class Room extends AbstractEntity {
 	public void setUpdateId(UUID updateId) {
 		this.updateId = updateId;
 	}	
+	
+	public String getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(String roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 }

@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -179,7 +180,7 @@ public class InventoryControllerTest {
         roomEquipment.setCreateDate(LocalDateTime.now());
         roomEquipment.setUpdateDate(null);
         roomEquipment.setUpdateId(null);
-        roomEquipment.setCreateBy(1234);
+        roomEquipment.setCreateBy(UUID.randomUUID());
         
         when(roomService.addEquipment(any(RoomEquipment.class))).thenReturn(roomEquipment);
 
