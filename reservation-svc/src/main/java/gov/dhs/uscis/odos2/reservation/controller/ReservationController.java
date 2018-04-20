@@ -1,7 +1,9 @@
 package gov.dhs.uscis.odos2.reservation.controller;
 
 
+import gov.dhs.uscis.odos2.reservation.dto.ReservationDTO;
 import gov.dhs.uscis.odos2.reservation.exception.InvalidReservationException;
+import gov.dhs.uscis.odos2.reservation.model.ErrorResponse;
 import gov.dhs.uscis.odos2.reservation.model.Reservation;
 import gov.dhs.uscis.odos2.reservation.service.ReservationService;
 import io.swagger.annotations.Api;
@@ -17,9 +19,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("reservation")
@@ -48,26 +53,60 @@ public class ReservationController {
 
         } catch (InvalidReservationException e) {
             LOGGER.error(e.getMessage(), e);
-            return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()),
+                    headers, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(newReservation, headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(new ReservationDTO(newReservation), headers, HttpStatus.CREATED);
     }
 
 
     @GetMapping
     @ResponseBody
-    @RequestMapping(value = "/{dateString}")
+    @RequestMapping(value = "/{date}")
     @ApiOperation(value = "Return all the Reservations for the given date", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully returned")
+    })
+    public ResponseEntity<List<ReservationDTO>> getReservationsByDate(
+            @NotNull @PathVariable String date) {
+
+        LocalDate reservationDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+
+        List<Reservation> reservationList = reservationService.getReservationsByDate(reservationDate);
+        return new ResponseEntity<>(
+                reservationList
+                        .stream()
+                        .map(ReservationDTO::new)
+                        .collect(Collectors.toList()),
+                HttpStatus.OK);
+    }
+
+    @GetMapping
+    @ResponseBody
+    @RequestMapping(value = "/search")
+    @ApiOperation(value = "Return all the Reservations for the given date, start and end time", response = List.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully created reservation")
     })
-    public ResponseEntity<List<Reservation>> getReservationsByDate(@PathVariable String dateString) {
+    public ResponseEntity<List<ReservationDTO>> getReservationsByDateAndTime(
+            @NotNull @RequestParam String date,
+            @NotNull @RequestParam String from,
+            @NotNull @RequestParam String to) {
 
-        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
+        LocalDate reservationDate = LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+        LocalTime fromTime = LocalTime.parse(from);
+        LocalTime toTime = LocalTime.parse(to);
+
+        List<Reservation> reservationList = reservationService.
+                getReservationsByDateAndTime(reservationDate, fromTime, toTime);
 
         return new ResponseEntity<>(
-                reservationService.getReservationsByDate(date), HttpStatus.OK);
+                reservationList
+                        .stream()
+                        .map(ReservationDTO::new)
+                        .collect(Collectors.toList()),
+                HttpStatus.OK);
     }
 
 }
