@@ -28,7 +28,7 @@ public class APISteps extends Steps {
 
 	@Given("^I add a new requestor$")
 	public void i_add_a_new_requestor() {
-		RestAssured.baseURI = LoadProperties.getProperty("user.api.url");
+		RestAssured.baseURI = LoadProperties.getAPIURL();
 
 		JsonObject body = new JsonObject();
 		body.addProperty("userName", DataUtils.getRandomString(10));
@@ -42,7 +42,7 @@ public class APISteps extends Steps {
 
 	@Then("^the new requestor can be retrieved$")
 	public void the_new_requestor_can_be_retrieved() {
-		RestAssured.baseURI = LoadProperties.getProperty("user.api.url");
+		RestAssured.baseURI = LoadProperties.getAPIURL();
 		
 		String uuid = extractUUID(executionContext.getCurrentScenarioObj().get("Location").getAsString());
 		
@@ -54,14 +54,14 @@ public class APISteps extends Steps {
 
 	@When("^I delete the requestor$")
 	public void i_delete_the_requestor() {
-		RestAssured.baseURI = LoadProperties.getProperty("user.api.url");
+		RestAssured.baseURI = LoadProperties.getAPIURL();
 		String uuid = extractUUID(executionContext.getCurrentScenarioObj().get("Location").getAsString());
 		given().when().delete(uuid).then().statusCode(200).and().extract().response();
 	}
 
 	@Then("^the requestor cannot be retrieved$")
 	public void the_requestor_cannot_be_retrieved() {
-		RestAssured.baseURI = LoadProperties.getProperty("user.api.url");
+		RestAssured.baseURI = LoadProperties.getAPIURL();
 		
 		String uuid = extractUUID(executionContext.getCurrentScenarioObj().get("Location").getAsString());
 		
@@ -73,7 +73,7 @@ public class APISteps extends Steps {
 
 	@When("^I edit the requestor$")
 	public void i_edit_the_requestor() {
-		RestAssured.baseURI = LoadProperties.getProperty("user.api.url");
+		RestAssured.baseURI = LoadProperties.getAPIURL();
 
 		JsonObject body = new JsonObject();
 		body.addProperty("userName", DataUtils.getRandomString(10));
@@ -87,7 +87,7 @@ public class APISteps extends Steps {
 
 	@Then("^the edited requestor can be retrieved$")
 	public void the_edited_requestor_can_be_retrieved() {
-		RestAssured.baseURI = LoadProperties.getProperty("user.api.url");
+		RestAssured.baseURI = LoadProperties.getAPIURL();
 		
 		String uuid = extractUUID(executionContext.getCurrentScenarioObj().get("Location").getAsString());
 		Response response = given().when().get().then().statusCode(200).and().extract().response();
