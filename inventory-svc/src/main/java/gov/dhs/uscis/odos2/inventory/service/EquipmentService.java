@@ -2,7 +2,6 @@ package gov.dhs.uscis.odos2.inventory.service;
 
 import java.util.List;
 
-import gov.dhs.uscis.odos2.inventory.dto.EquipmentDTO;
 import gov.dhs.uscis.odos2.inventory.model.Equipment;
 
 public interface EquipmentService {
@@ -13,5 +12,5 @@ public interface EquipmentService {
 	
 	//Equipment updateEquipments(Integer equipmentId);
 
-	Equipment getEquipmentFromDTO(EquipmentDTO equipmentDTO);
+	//Equipment getEquipmentFromDTO(EquipmentDTO equipmentDTO);
 }

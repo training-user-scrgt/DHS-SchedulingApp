@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  * The Building JPA entity.
@@ -44,13 +45,13 @@ public final class RoomEquipment extends AbstractEntity {
     private LocalDateTime createDate;
     
     @Column(name = "create_by", nullable = false)
-    private Integer createBy;
+    private UUID createBy;
     
     @Column(name = "update_date", nullable = true)
     private LocalDateTime updateDate;
     
     @Column(name = "update_id", nullable = true)
-    private Integer updateId;
+    private UUID updateId;
 
     /**
      * default constructor
@@ -91,14 +92,6 @@ public final class RoomEquipment extends AbstractEntity {
 		this.createDate = createDate;
 	}
 
-	public Integer getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(Integer createBy) {
-		this.createBy = createBy;
-	}
-
 	public LocalDateTime getUpdateDate() {
 		return updateDate;
 	}
@@ -107,11 +100,19 @@ public final class RoomEquipment extends AbstractEntity {
 		this.updateDate = updateDate;
 	}
 
-	public Integer getUpdateId() {
+	public UUID getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(UUID createBy) {
+		this.createBy = createBy;
+	}
+
+	public UUID getUpdateId() {
 		return updateId;
 	}
 
-	public void setUpdateId(Integer updateId) {
+	public void setUpdateId(UUID updateId) {
 		this.updateId = updateId;
-	}
+	}	
 }
