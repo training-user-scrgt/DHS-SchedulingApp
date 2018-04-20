@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import gov.dhs.uscis.odos2.inventory.dto.RoomDTO;
 import gov.dhs.uscis.odos2.inventory.exception.InvalidInventoryException;
-import gov.dhs.uscis.odos2.inventory.model.Equipment;
 import gov.dhs.uscis.odos2.inventory.model.Room;
 import gov.dhs.uscis.odos2.inventory.model.RoomEquipment;
 import gov.dhs.uscis.odos2.inventory.repository.EquipmentRepository;
@@ -67,7 +65,7 @@ public class RoomServiceImpl implements RoomService{
     	
    
     	roomEquipment.setCreateDate(LocalDateTime.now());
-    	roomEquipment.setCreateBy(1);
+    	roomEquipment.setCreateBy(roomEquipment.getCreateBy());
     	
     	roomEquipment = roomEquipmentRepository.save(roomEquipment);
         return roomEquipment;
@@ -87,7 +85,7 @@ public class RoomServiceImpl implements RoomService{
      * @param scheduleADTO
      * @return ScheduleA
      */
-    private Room getRoomFromDTO(RoomDTO roomDTO) {
+    /*private Room getRoomFromDTO(RoomDTO roomDTO) {
     	Room room = new Room();
     	room.setRoomId(roomDTO.getRoomId());
     	room.setRoomName(roomDTO.getRoomName());
@@ -100,14 +98,12 @@ public class RoomServiceImpl implements RoomService{
     	room.setUpdateDate(roomDTO.getUpdateDate());
     	room.setUpdateId(roomDTO.getUpdateId());
         return room;
-    }
+    }*/
     
     @Override
     public Room updateRoomStatus(Room room) throws InvalidInventoryException {
     	
-       // validateReservationValues(room);        
-
-        room.setUpdateId(1);
+        room.setUpdateId(room.getUpdateId());
         room.setUpdateDate(LocalDateTime.now());
 
         return roomRepository.save(room);
