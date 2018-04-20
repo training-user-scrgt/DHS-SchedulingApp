@@ -71,12 +71,11 @@ public class UserAdminServiceImpl implements UserAdminService {
         if ( existingUser == null ) {
             throw new InvalidUserException("User does not exist");
         }
-        
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setUpdatedDate(LocalDateTime.now());
         
-        return usersRepository.save(user);
+        return usersRepository.save(existingUser);
     }
 
     @Override
@@ -85,7 +84,7 @@ public class UserAdminServiceImpl implements UserAdminService {
         Users userToDelete = usersRepository.findUsersById(userID);
         System.out.println("success");
         String mystring = userToDelete.getUserName();
-        if ( usersRepository.findByUsername(mystring) == null ) {
+        if (usersRepository.findByUsername(mystring) == null ) {
             throw new InvalidUserException("User does not exist");
         }
         usersRepository.delete(userToDelete);
