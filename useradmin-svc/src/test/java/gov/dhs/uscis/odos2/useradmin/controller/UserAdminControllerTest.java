@@ -1,6 +1,5 @@
 package gov.dhs.uscis.odos2.useradmin.controller;
 
-import gov.dhs.uscis.odos2.useradmin.exception.*;
 import gov.dhs.uscis.odos2.useradmin.model.*;
 import gov.dhs.uscis.odos2.useradmin.service.*;
 import org.junit.Test;
@@ -17,11 +16,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.http.ResponseEntity;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -47,12 +43,24 @@ public class UserAdminControllerTest {
    @MockBean
    private UserAdminService userAdminService;
 
+   Users existingUser;
+
    @Before
    public void setup() {
        mvc = MockMvcBuilders
                .webAppContextSetup(context)
                .addFilters(springSecurityFilterChain)
                .build();
+
+        this.existingUser = new Users();
+        this.existingUser.setId(UUID.randomUUID());
+        this.existingUser.setUserName("testuser");
+        this.existingUser.setFirstName("first");
+        this.existingUser.setLastName("last");
+        this.existingUser.setCreatedDate(LocalDateTime.now());
+        this.existingUser.setCreatedBy(UUID.randomUUID());
+        this.existingUser.setUpdatedDate(LocalDateTime.now());
+        this.existingUser.setUpdatedBy(UUID.randomUUID());
    }
 
    private final String CREATE_USER_BODY = "{\n" +
@@ -75,5 +83,18 @@ public class UserAdminControllerTest {
                .content(CREATE_USER_BODY)
                .contentType(MediaType.APPLICATION_JSON))
                .andExpect(status().isCreated());
+   }
+
+   @Test
+   @Ignore
+   public void shouldDeleteUser() throws Exception {
+
+       when(userAdminService.modifyExistingUser(any(UUID.class), any(Users.class))).thenReturn(existingUser);
+
+
+       mvc.perform(post("/user/" + existingUser.getId())
+               .content(CREATE_USER_BODY)
+               .contentType(MediaType.APPLICATION_JSON))
+               .andExpect(status().is2xxSuccessful());
    }
 }
