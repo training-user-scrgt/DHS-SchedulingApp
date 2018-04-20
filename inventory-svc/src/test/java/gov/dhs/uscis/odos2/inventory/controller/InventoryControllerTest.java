@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,9 +60,9 @@ public class InventoryControllerTest {
             "\t},\n" +         
             "\t\"available\": false,\n" +
             "\t\"createDate\": \"2018-04-17T15:09:31.829\",\n" +
-            "\t\"createBy\": 1,\n" +
+            "\t\"createBy\": \"9c9b92ec-44ab-11e8-842f-0ed5f89f718b\",\n" +
             "\t\"updateDate\": null,\n" + 
-    		"\t\"updateId\": null\n" + 
+    		"\t\"updateId\": \"9c9b92ec-44ab-11e8-842f-0ed5f89f718b\"\n" + 
             "}";
     
     private final String GOOD_ROOM_BODY = "{\n" + 
@@ -71,10 +70,10 @@ public class InventoryControllerTest {
     		"\t\"roomId\" : 1\n" + 
     		"\t},\n" + 
     		"\t\"equipment\" : {\n" + 
-    		"\t\"equipmentId\" : 3\n" + 
+    		"\t\"equipmentId\" : 1\n" + 
     		"\t},\n" + 
     		"\t\"createDate\": \"2018-04-19T15:09:31.829\",\n" + 
-    		"\t\"createBy\": 2323,\n" + 
+    		"\t\"createBy\": \"9c9b92ec-44ab-11e8-842f-0ed5f89f718b\",\n" + 
     		"\t\"updateDate\": null,\n" + 
     		"\t\"updateId\": null\n" + 
     		"}";
@@ -189,10 +188,9 @@ public class InventoryControllerTest {
         		.content(GOOD_ROOM_BODY)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
-
     }
     
-    @Test @Ignore
+    @Test
     public void shouldUpdateRoom() throws Exception {
 
         Room room = new Room();
@@ -205,7 +203,6 @@ public class InventoryControllerTest {
         		.content(ROOM_BODY)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
-
     }
     
    @Test
@@ -214,6 +211,5 @@ public class InventoryControllerTest {
         mvc.perform(post("/room_equipment/12")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
     }
 }
