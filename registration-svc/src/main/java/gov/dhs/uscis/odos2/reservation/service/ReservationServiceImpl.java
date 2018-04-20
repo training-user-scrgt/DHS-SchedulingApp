@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.*;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -28,7 +29,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         checkConflicts(reservation);
 
-        reservation.setCreateBy(1);
+        reservation.setCreateBy(UUID.fromString("280A90BD-6740-46D5-A13C-DBA25BF278CD"));
         reservation.setCreateDate(LocalDateTime.now());
 
         return reservationRepository.save(reservation);

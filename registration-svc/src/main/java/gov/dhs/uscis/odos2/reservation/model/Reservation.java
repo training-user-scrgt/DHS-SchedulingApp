@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Objects;
+import java.util.UUID;
 
 @Entity(name = "reservation")
 public class Reservation {
@@ -36,13 +36,13 @@ public class Reservation {
     private LocalDateTime createDate;
 
     @Column(name = "create_by", nullable = false)
-    private Integer createBy;
+    private UUID createBy;
 
     @Column(name = "update_date", nullable = true)
     private LocalDateTime lastUpdateDate;
 
     @Column(name = "update_by", nullable = false)
-    private Integer lastUpdateBy;
+    private UUID lastUpdateBy;
 
 
 
@@ -102,11 +102,11 @@ public class Reservation {
         this.createDate = createDate;
     }
 
-    public Integer getCreateBy() {
+    public UUID getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Integer createBy) {
+    public void setCreateBy(UUID createBy) {
         this.createBy = createBy;
     }
 
@@ -118,11 +118,11 @@ public class Reservation {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public Integer getLastUpdateBy() {
+    public UUID getLastUpdateBy() {
         return lastUpdateBy;
     }
 
-    public void setLastUpdateBy(Integer lastUpdateBy) {
+    public void setLastUpdateBy(UUID lastUpdateBy) {
         this.lastUpdateBy = lastUpdateBy;
     }
 
