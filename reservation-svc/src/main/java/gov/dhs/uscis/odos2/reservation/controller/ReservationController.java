@@ -26,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin
 @RestController
 @RequestMapping("reservation")
 @Api(value = "reservation", description = "Online Conference Room Reservation")
