@@ -52,7 +52,7 @@ public class APISteps extends Steps {
 
 	@Then("^my reservation can be retrieved$")
 	public void my_reservation_can_be_retrieved() {
-		RestAssured.baseURI = LoadProperties.getProperty("reservation.api.url");
+		RestAssured.baseURI = LoadProperties.getAPIURL();
 
 		String reservationDate = executionContext.getCurrentScenarioObj().get("reservationDate").getAsString();
 
