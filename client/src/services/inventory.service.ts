@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class InventoryService {
 
-    public baseUrl = environment.apiUrl; 
+    public baseUrl = environment.inventoryApi;
     private readonly _roomsUrl: string = "/room";
     private readonly _roomByIdUrl: string = "/room";
 

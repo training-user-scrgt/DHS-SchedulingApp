@@ -5,5 +5,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080'
+  // apiUrl: 'http://localhost:8080',
+    userApi: 'http://useradmin-stage-odos2-useradmin-svc-app.b9ad.pro-us-east-1.openshiftapps.com',
+    reservationApi: 'http://ra-service-prod-odos2-res-svc-app.b9ad.pro-us-east-1.openshiftapps.com',
+    inventoryApi: 'http://inventory-prod-route-odos2-inv-svc-app.b9ad.pro-us-east-1.openshiftapps.com'
 };
