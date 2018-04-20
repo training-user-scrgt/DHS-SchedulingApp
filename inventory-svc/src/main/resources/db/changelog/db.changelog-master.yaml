@@ -25,7 +25,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: create_by
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: false
               - column:
@@ -35,7 +35,7 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: update_id
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: true
         - createTable:
@@ -70,7 +70,7 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: update_id
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: true
         - createTable:
@@ -111,7 +111,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: create_by
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: false
               - column:
@@ -121,7 +121,7 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: update_id
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: true  
               - column:
@@ -156,7 +156,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: create_by
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: false
               - column:
@@ -166,7 +166,7 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: update_id
-                  type: int
+                  type: uuid
                   constraints:
                     nullable: true                                                        
         - addForeignKeyConstraint:

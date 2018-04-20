@@ -174,7 +174,7 @@ public class InventoryController {
     	return new ResponseEntity<Void>(headers, HttpStatus.OK);
     }
     
-    @PutMapping(value = "/room/{room_id}", produces = "application/json")
+    @PostMapping(value = "/room/{room_id}", produces = "application/json")
     public ResponseEntity<Void> updateRoomStatus(@RequestBody Room room, UriComponentsBuilder builder) {
     
     	HttpHeaders headers = new HttpHeaders();

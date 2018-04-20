@@ -105,4 +105,14 @@ public class ReservationServiceImpl implements ReservationService {
 
         return reservationRepository.getAllByReservationDateOrderByStartTime(date);
     }
+
+    @Override
+    public List<Reservation> getReservationsByDateAndTime(LocalDate date, LocalTime fromTime, LocalTime toTime) {
+
+        if (date == null || fromTime == null || toTime == null) {
+            throw new IllegalArgumentException("Invalid arguments");
+        }
+
+        return reservationRepository.getReservationsByReservationDateAndTime(date, fromTime, toTime);
+    }
 }
