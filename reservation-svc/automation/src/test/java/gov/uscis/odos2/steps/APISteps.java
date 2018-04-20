@@ -25,7 +25,7 @@ public class APISteps extends Steps {
 
 	@Given("^I make a reservation$")
 	public void i_make_a_reservation_for_today() {
-		RestAssured.baseURI = LoadProperties.getProperty("reservation.api.url");
+		RestAssured.baseURI = LoadProperties.getAPIURL();
 
 		LocalDate today = LocalDate.now();
 		LocalDate weekDay = getWeekDay(today);

@@ -48,4 +48,11 @@ public class LoadProperties {
 		logger.info("Application URL is: " + webURL);
 		return webURL;
 	}
+	
+	public static String getAPIURL() {
+		String apiURL = System.getProperty("reservation.api.url") == null ? 
+				LoadProperties.getProperty("reservation.api.url") : System.getProperty("reservation.api.url");
+		logger.info("API URL is: " + apiURL);
+		return apiURL;
+	}
 }
