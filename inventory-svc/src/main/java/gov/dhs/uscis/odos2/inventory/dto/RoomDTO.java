@@ -1,3 +1,4 @@
+
 package gov.dhs.uscis.odos2.inventory.dto;
 
 import gov.dhs.uscis.odos2.inventory.model.Room;
@@ -44,7 +45,7 @@ public class RoomDTO {
     	roomDTO.setUpdateDate(room.getUpdateDate());
     	roomDTO.setUpdateId(room.getUpdateId());
     	roomDTO.setRoomNumber(room.getRoomNumber());
-        return roomDTO;
+      return roomDTO;
     }
 
     public static List<RoomDTO> mapFromBuildingsEntities(List<Room> rooms) {

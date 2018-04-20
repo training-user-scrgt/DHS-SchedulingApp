@@ -1,4 +1,4 @@
-@smoke
+@wip
 Feature: Role-based Login
   As a user, when I login to the application
   I want to be presented with a landing page according to my persona

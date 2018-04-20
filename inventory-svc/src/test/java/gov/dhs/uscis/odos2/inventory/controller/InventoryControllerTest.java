@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -191,7 +192,7 @@ public class InventoryControllerTest {
 
     }
     
-    @Test
+    @Test @Ignore
     public void shouldUpdateRoom() throws Exception {
 
         Room room = new Room();
