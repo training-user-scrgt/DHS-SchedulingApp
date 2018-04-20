@@ -18,8 +18,9 @@ import { ITdDataTableColumn } from '@covalent/core/data-table';
 })
 export class RoomsComponent implements OnInit {
   columns: ITdDataTableColumn[] = [
-    { name: 'building',  label: 'Building Name' },
     { name: 'roomName', label: 'Room Name' },
+    { name: 'building',  label: 'Building Name' }, 
+    { name: 'roomNumber', label: 'Room Number' },
     { name: 'capacity', label: 'Occupancy' },
   ];
   rooms: Room[];
