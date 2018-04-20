@@ -21,6 +21,7 @@ public class RoomDTO {
     private Integer createBy;
     private LocalDateTime updateDate;
     private Integer updateId;
+    private String roomNumber;
     
 
     /**
@@ -41,6 +42,7 @@ public class RoomDTO {
     	roomDTO.setCreateBy(room.getCreateBy());
     	roomDTO.setUpdateDate(room.getUpdateDate());
     	roomDTO.setUpdateId(room.getUpdateId());
+    	roomDTO.setRoomNumber(room.getRoomNumber());
         return roomDTO;
     }
 
@@ -120,5 +122,11 @@ public class RoomDTO {
 		this.updateId = updateId;
 	}
 
-    
+	public String getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(String roomNumber) {
+		this.roomNumber = roomNumber;
+	}
 }

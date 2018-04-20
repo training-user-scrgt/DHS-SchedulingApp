@@ -2,6 +2,7 @@ package gov.dhs.uscis.odos2.inventory.service;
 
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,7 @@ public class RoomServiceTest {
     	List<Room> roomList = new ArrayList<Room>();
     	roomList.add(this.room);
     	
-        when(roomRepository.findAll()).thenReturn(roomList);
+        when(roomRepository.findRoomByAvailable(true)).thenReturn(roomList);
 
     	List<Room> roomListResult = roomService.getAllRooms();
         assertThat(roomListResult).isNotNull();
