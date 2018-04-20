@@ -10,7 +10,6 @@ import java.util.List;
 public class Users {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private UUID id;
 

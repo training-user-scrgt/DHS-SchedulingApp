@@ -21,10 +21,10 @@
 // public class JwtSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 //     @Value("${jwt.secret}")
-//     String secret;
+//     private String secret;
 
 //     @Value("${jwt.issuer}")
-//     String issuer;
+//     private String issuer;
 
 //     @Override
 //     public AuthenticationManager authenticationManagerBean() throws Exception {
