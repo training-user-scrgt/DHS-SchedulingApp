@@ -55,8 +55,8 @@ public class UserAdminServiceImpl implements UserAdminService {
         user.setId(userID);
         user.setCreatedDate(LocalDateTime.now());
         //random till pulled from token
-        user.setCreatedBy(UUID.randomUUID());
-        user.setUpdatedBy(UUID.randomUUID());
+        user.setCreatedBy(userID);
+        user.setUpdatedBy(userID);
         user.setUpdatedDate(LocalDateTime.now());
 
         //default role if none exists

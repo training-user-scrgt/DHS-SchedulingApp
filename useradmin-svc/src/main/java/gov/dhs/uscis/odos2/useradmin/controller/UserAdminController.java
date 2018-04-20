@@ -2,7 +2,6 @@ package gov.dhs.uscis.odos2.useradmin.controller;
 
 import gov.dhs.uscis.odos2.useradmin.exception.InvalidUserException;
 import gov.dhs.uscis.odos2.useradmin.exception.UserAlreadyExistsException;
-import gov.dhs.uscis.odos2.useradmin.model.JwtToken;
 import gov.dhs.uscis.odos2.useradmin.model.Users;
 import gov.dhs.uscis.odos2.useradmin.service.UserAdminService;
 import org.slf4j.Logger;
@@ -11,14 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
