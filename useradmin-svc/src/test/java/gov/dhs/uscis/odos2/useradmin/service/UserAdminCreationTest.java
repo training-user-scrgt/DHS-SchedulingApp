@@ -73,7 +73,7 @@ public class UserAdminCreationTest {
         when(rolesRepository.findByRole(any(String.class))).thenReturn(this.role);
         this.user.setUserName(null);
         Users newUser = useradminService.createNewUser(this.user);
-        assertTrue(newUser.getFirstName() == null);
+        assertTrue(newUser.getUserName() == null);
     }
 
     @Test(expected = InvalidUserException.class)
@@ -81,7 +81,7 @@ public class UserAdminCreationTest {
         when(rolesRepository.findByRole(any(String.class))).thenReturn(this.role);
         this.user.setLastName(null);
         Users newUser = useradminService.createNewUser(this.user);
-        assertTrue(newUser.getFirstName() == null);
+        assertTrue(newUser.getLastName() == null);
     }
 
     @Test(expected = InvalidUserException.class)
