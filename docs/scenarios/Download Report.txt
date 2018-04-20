@@ -1,0 +1,30 @@
+Feature: Downloading a Report
+As a Reservation manager, I shall be able to access to a report which is exportable with data depicted as a histogram
+
+Scenario: Downloading the Report in CSV format
+	Given I am logged in as a Reservation Manager
+		Then I click on Reporting
+		Then I click on the dropdown menu for Export As
+			And the system allows me to download the report in CSV format
+		Then I am able to download the report in selected format successfully
+
+Scenario: Downloading the Report in PDF format
+	Given I am logged in as a Reservation Manager
+		Then I click on Reporting
+		Then I click on the dropdown menu for Export As
+			And the system allows me to download the report in PDF format
+		Then I am able to download the report in selected format successfully
+
+Scenario: Downloading the Report in PNG format
+	Given I am logged in as a Reservation Manager
+		Then I click on Reporting
+		Then I click on the dropdown menu for Export As
+			And the system allows me to download the report in PNG format
+		Then I am able to download the report in selected format successfully
+
+Scenario: Downloading the Report in JPG format
+	Given I am logged in as a Reservation Manager
+		Then I click on Reporting
+		Then I click on the dropdown menu for Export As
+			And the system allows me to download the report in JPG format
+		Then I am able to download the report in selected format successfully

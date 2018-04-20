@@ -37,7 +37,7 @@ public class JwtSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(
                 SessionCreationPolicy.STATELESS);
         http.addFilterAfter(new JwtFilter(secret, issuer, authenticationManagerBean()),
-                AnonymousAuthenticationFilter.class).antMatcher("/user/**");
+                AnonymousAuthenticationFilter.class).antMatcher("/_user/**");
 
     }
 

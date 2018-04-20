@@ -1,0 +1,16 @@
+Feature: Update Audio/Visual equipment list
+As an administrator, I shall be able to change the Audio/Visual equipment list
+
+Scenario: Update the equipment list
+	Given Administrator logged in to the system
+		When I click on the Manage Conference Rooms
+		Then I select a Conrefence Room for whome the list needs to be updated
+		Then I click on the Edit button associated with that room
+		Then system displays Edit Room Details option
+			And system allows me to update the available A/V Equipment
+		Then I select the necessary equipment from the list
+		Then I click on the Save Changes button
+		Then system takes me back to the Manage Conference Rooms
+
+
+
