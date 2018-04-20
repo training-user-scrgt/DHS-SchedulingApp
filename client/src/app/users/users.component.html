@@ -39,10 +39,10 @@
           <div class="pad" *ngIf="filteredUsers?.length === 0" layout="row" layout-align="center center">
             <h3>No users to display.</h3>
           </div>
-          <ng-template let-room let-last="last" ngFor [ngForOf]="rooms">
+          <ng-template let-room let-last="last" ngFor [ngForOf]="users">
             <mat-list-item>
               <mat-icon matListAvatar>person</mat-icon>
-              <h3 matLine> {{room.roomName}} </h3>
+              <h3 matLine> {{user.userName}} </h3>
               
             </mat-list-item>
             <mat-divider *ngIf="!last" [inset]="true"></mat-divider>

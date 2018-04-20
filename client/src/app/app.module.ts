@@ -41,6 +41,7 @@ import { MainComponent } from './main.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { InventoryService } from '../services/inventory.service';
+import { UserService } from '../services/user.service';
 import { RoomsComponent } from './rooms/rooms.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { ReportComponent } from './report/report.component';
@@ -103,7 +104,7 @@ export function getAPI(): string {
     httpInterceptorProviders,
     Title, {
       provide: USERS_API, useFactory: getAPI,
-    }, USER_PROVIDER,InventoryService,
+    }, USER_PROVIDER, InventoryService, UserService,
   ], // additional providers needed for this module
   entryComponents: [ ],
   bootstrap: [ AppComponent ],
