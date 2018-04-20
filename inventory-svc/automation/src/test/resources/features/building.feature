@@ -1,4 +1,4 @@
-@smoke
+@wip
 Feature: Buildings Service
   As a user, I want to be able to add and remove buildings
   so that users can have an up-to-date list of places to meet
