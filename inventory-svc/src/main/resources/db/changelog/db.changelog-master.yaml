@@ -87,7 +87,7 @@ databaseChangeLog:
                   name: building_id
                   type: int
                   constraints:
-                    unique: true
+                    unique: false
                     nullable: false
               - column:
                   name: room_name
