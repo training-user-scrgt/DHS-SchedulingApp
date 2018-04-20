@@ -36,10 +36,10 @@ const routes: Routes = [{
     }],
   }, {
     path: 'reservations',
-    component: ReservationsComponent,
+    component: ReservationsComponent
   }, {
     path: 'report',
-    component: ReportComponent,
+    component: ReportComponent
   }, 
 ];
 

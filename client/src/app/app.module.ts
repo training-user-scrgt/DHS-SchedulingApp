@@ -85,6 +85,7 @@ export function getAPI(): string {
     // covalent modules
     CovalentCommonModule,
     CovalentLayoutModule,
+    CovalentDialogsModule,
     CovalentMediaModule,
     CovalentLoadingModule,
     CovalentDataTableModule,

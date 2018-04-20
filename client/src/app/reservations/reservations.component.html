@@ -1,3 +1,166 @@
-<p>
-  reservations works!
-</p>
+<td-layout-nav navigationRoute="/">
+  <div td-toolbar-content layout="row" layout-align="center center" flex>
+    <span>
+      <img src="assets/icons/png/DHS_icon_small.png" width="18"> ODOS Reservation App
+    </span>
+    <span flex></span>
+  </div>
+
+  <div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+
+    <div flex-gt-sm="100">
+
+      <div layout-gt-xs="row">
+        <div flex-gt-xs="100">
+          <mat-card>
+            <mat-card-content class="text-center bgc-blue-grey-50">
+              <mat-card-title class="text-center">Make a Reservation</mat-card-title>
+              <div>&nbsp;</div>
+            </mat-card-content>
+
+          </mat-card>
+        </div>
+      </div>
+
+      <div layout-gt-xs="row">
+        <div flex-gt-xs="33">
+          <mat-card>
+            <mat-card-title class="mat-card-title">Washington Conference Room #10</mat-card-title>
+            <mat-card-subtitle class="mat-card-subtitle">Mosic Park</mat-card-subtitle>
+            <mat-card-subtitle class="mat-card-subtitle">April 18, 2018 9:00 - 10:00 AM EST</mat-card-subtitle>
+            <mat-divider></mat-divider>
+
+            <mat-card-content class="text-center bgc-blue-grey-50">
+
+              <div class="mat-list-text">
+                <p class="mat-line text-left" matline="">Conference phone</p>
+                <p class="mat-line text-left" matline="">Tablet</p>
+              </div>
+
+              <button class="text-upper mat-raised-button mat-accent" color="accent" mat-raised-button="" ng-reflect-color="accent" (click)="openConfirm()">
+                <span class="mat-button-wrapper">reserve</span>
+                <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-trigger="[object HTMLButtonElement]" ng-reflect-centered="false"
+                  ng-reflect-disabled="false"></div>
+                <div class="mat-button-focus-overlay"></div>
+              </button>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div flex-gt-xs="33">
+            <mat-card>
+                <mat-card-title class="mat-card-title">Reagan Conference Room #23</mat-card-title>
+                <mat-card-subtitle class="mat-card-subtitle">Main Campus Building</mat-card-subtitle>
+                <mat-card-subtitle class="mat-card-subtitle">April 18, 2018 9:00 - 10:00 AM EST</mat-card-subtitle>
+              <mat-divider></mat-divider>
+  
+              <mat-card-content class="text-center bgc-blue-grey-50">
+  
+                <div class="mat-list-text">
+                  <p class="mat-line text-left" matline="">Conference phone</p>
+                  <p class="mat-line text-left" matline="">Projector</p>
+                </div>
+  
+                <button class="text-upper mat-raised-button mat-accent" color="accent" mat-raised-button="" ng-reflect-color="accent" (click)="openConfirm()">
+                  <span class="mat-button-wrapper">reserve</span>
+                  <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-trigger="[object HTMLButtonElement]" ng-reflect-centered="false"
+                    ng-reflect-disabled="false"></div>
+                  <div class="mat-button-focus-overlay"></div>
+                </button>
+  
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div flex-gt-xs="33">
+              <mat-card>
+                  <mat-card-title class="mat-card-title">Clinton Conference Room #14</mat-card-title>
+                  <mat-card-subtitle class="mat-card-subtitle">Mosic Park</mat-card-subtitle>
+                  <mat-card-subtitle class="mat-card-subtitle">April 18, 2018 9:00 - 10:00 AM EST</mat-card-subtitle>
+                <mat-divider></mat-divider>
+    
+                <mat-card-content class="text-center bgc-blue-grey-50">
+    
+                  <div class="mat-list-text">
+                    <p class="mat-line text-left" matline="">Conference phone</p>
+                    <p class="mat-line text-left" matline="">Projector</p>
+                  </div>
+    
+                  <button class="text-upper mat-raised-button mat-accent" color="accent" mat-raised-button="" ng-reflect-color="accent" (click)="openConfirm()">
+                    <span class="mat-button-wrapper">reserve</span>
+                    <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-trigger="[object HTMLButtonElement]" ng-reflect-centered="false"
+                      ng-reflect-disabled="false"></div>
+                    <div class="mat-button-focus-overlay"></div>
+                  </button>
+    
+                </mat-card-content>
+              </mat-card>
+            </div>
+
+            
+      </div>
+
+      <div layout-gt-xs="row">
+          <div flex-gt-xs="33">
+            <mat-card>
+              <mat-card-title class="mat-card-title">Jefferson Conference Room #11</mat-card-title>
+              <mat-card-subtitle class="mat-card-subtitle">Main Campus Building</mat-card-subtitle>
+              <mat-card-subtitle class="mat-card-subtitle">April 18, 2018 9:00 - 10:00 AM EST</mat-card-subtitle>
+              <mat-divider></mat-divider>
+  
+              <mat-card-content class="text-center bgc-blue-grey-50">
+  
+                <div class="mat-list-text">
+                  <p class="mat-line text-left" matline="">Audio</p>
+                  <p class="mat-line text-left" matline="">Projector</p>
+                </div>
+  
+                <button class="text-upper mat-raised-button mat-accent" color="accent" mat-raised-button="" ng-reflect-color="accent" (click)="openConfirm()">
+                  <span class="mat-button-wrapper">reserve</span>
+                  <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-trigger="[object HTMLButtonElement]" ng-reflect-centered="false"
+                    ng-reflect-disabled="false"></div>
+                  <div class="mat-button-focus-overlay"></div>
+                </button>
+  
+              </mat-card-content>
+            </mat-card>
+          </div>
+  
+          <div flex-gt-xs="33">
+              <mat-card>
+                  <mat-card-title class="mat-card-title">Bush Conference Room #33</mat-card-title>
+                  <mat-card-subtitle class="mat-card-subtitle">Main Campus Building</mat-card-subtitle>
+                  <mat-card-subtitle class="mat-card-subtitle">April 18, 2018 9:00 - 10:00 AM EST</mat-card-subtitle>
+                <mat-divider></mat-divider>
+    
+                <mat-card-content class="text-center bgc-blue-grey-50">
+    
+                  <div class="mat-list-text">
+                    <p class="mat-line text-left" matline="">Conference phone</p>
+                    <p class="mat-line text-left" matline="">Tablet</p>
+                  </div>
+    
+                  <button class="text-upper mat-raised-button mat-accent" color="accent" mat-raised-button="" ng-reflect-color="accent" (click)="openConfirm()">
+                    <span class="mat-button-wrapper">reserve</span>
+                    <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-trigger="[object HTMLButtonElement]" ng-reflect-centered="false"
+                      ng-reflect-disabled="false"></div>
+                    <div class="mat-button-focus-overlay"></div>
+                  </button>
+    
+                </mat-card-content>
+              </mat-card>
+            </div>
+  
+        </div>
+
+    </div>
+
+
+
+  </div>
+
+
+  <!-- <h1>Still here</h1> -->
+
+</td-layout-nav>

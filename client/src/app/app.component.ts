@@ -29,5 +29,5 @@ export class AppComponent {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/querygrid.svg'));
   }
 
-  appTitle = "ODDS Reservation App";
+  appTitle = "ODOS Reservation App";
 }
