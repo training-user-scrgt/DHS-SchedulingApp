@@ -26,7 +26,6 @@ public class UserAdminController {
     private UserAdminService userAdminService;
 
     @GetMapping
-//    @PreAuthorize("hasAuthority('ROLE_REQUESTOR')")
     public List<Users> getUsers() {
         return userAdminService.findAllUsers();
     }

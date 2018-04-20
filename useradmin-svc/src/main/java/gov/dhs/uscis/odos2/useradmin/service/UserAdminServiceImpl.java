@@ -11,7 +11,6 @@ import gov.dhs.uscis.odos2.useradmin.repository.UserRolesRepository;
 import gov.dhs.uscis.odos2.useradmin.repository.UsersRepository;
 import gov.dhs.uscis.odos2.useradmin.service.UserAdminService;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,16 +49,13 @@ public class UserAdminServiceImpl implements UserAdminService {
             throw new UserAlreadyExistsException("User already exists");
         }
 
-        //make sure UUID is random
         UUID userID = UUID.randomUUID();
         user.setId(userID);
         user.setCreatedDate(LocalDateTime.now());
-        //random till pulled from token
         user.setCreatedBy(userID);
         user.setUpdatedBy(userID);
         user.setUpdatedDate(LocalDateTime.now());
 
-        //default role if none exists
         if (null == user.getRoles()) {
             Roles role = rolesRepository.findByRole("ROLE_REQUESTOR");
             List<Roles> roles = Collections.singletonList(role);
@@ -80,7 +76,6 @@ public class UserAdminServiceImpl implements UserAdminService {
         
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
-        //user.setUpdatedBy(method to pull user from saml)
         existingUser.setUpdatedDate(LocalDateTime.now());
         
         return saveUserandRolesFromUser(existingUser);
