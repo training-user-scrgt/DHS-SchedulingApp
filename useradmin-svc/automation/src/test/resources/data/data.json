@@ -1,0 +1,25 @@
+{
+	"Add a requestor": 
+	{
+		"user": 
+		{
+			"_comment": "this data object is not used"
+		}
+	},
+
+	"Delete a requestor": 
+	{
+		"user": 
+		{
+			"_comment": "this data object is not used"
+		}
+	},
+
+	"Update a requestor": 
+	{
+		"user": 
+		{
+			"_comment": "this data object is not used"
+		}
+	}
+}

@@ -1,0 +1,8 @@
+/bin/
+/log.out
+.settings
+.classpath
+.project
+target/
+build/test-results/
+build/test-result.json
